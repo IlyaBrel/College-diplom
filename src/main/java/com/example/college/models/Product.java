@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -24,8 +25,13 @@ public class Product {
     private String title;
     @Column(name = "description", columnDefinition = "text")
     private String description;
+
+
     @Column(name = "price")
     private int price;
+    @Column(name = "promotionalPrice")
+    private int promotionalPrice;
+
     @Column(name = "city")
     private String city;
 
@@ -39,12 +45,12 @@ public class Product {
     private LocalDateTime dateOfCreated;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Category category;
+    //Цены
     @Column(name = "popular")
     private boolean popular;
-
+    //Размеры
     @ElementCollection
     private List<String> dimensions = new ArrayList<>();
-
     @Column(name = "dimension")
     private String dimension;
 
@@ -72,5 +78,4 @@ public class Product {
     public boolean setPopular(boolean popular) {
         return this.popular = popular;
     }
-
 }

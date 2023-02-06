@@ -25,6 +25,7 @@ public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
 
+
     @GetMapping("/products")
     public String products(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
         model.addAttribute("category", categoryService.findAll(title));

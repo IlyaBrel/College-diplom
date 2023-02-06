@@ -178,17 +178,32 @@
             <#list products as product>
                 <a href="/product/${product.id}">
                     <li>
-                        <i> <img class="img-cat" src="/images/${product.previewImageId}" height="150px"/></i>
-                        <span class="text-pr">
+                        <#if product.promotionalPrice != 0 >
+                        <div class="badge">
+                            <#assign discountPercentage = (product.price-product.promotionalPrice)/product.price * 100>
+                            -${discountPercentage?int}%
+                        </div>
+                        <div class="p-c">
+                            </#if>
+                            <i> <img class="img-cat" src="/images/${product.previewImageId}" height="150px"/></i>
+                            <span class="text-pr">
 						<h3>${product.title} </p></h3>
                         <p>${product.description}</p>
-                        <h4 class="pr-price">${product.price}.00 р
+                            <div class="product-price">
+                            <#if product.promotionalPrice != 0 >
+                                <span class="offer-price">${product.promotionalPrice} р.</span>
+                                <span class="sale-price">${product.price} р.</span>
+                                <#else>
+                                <span class="offer-price">${product.price} р.</span>
+                            </#if>
+                                </div>
+<#--                        <h4 class="pr-price">${product.price}.00 р-->
                             <button class="btn-add-b">
                             <i> <img src="/images/33" height="27px" alt=""/><h4>В корзину</h4></i>
                         </button>
-                            </h4>
-
+                                </h4>
 					</span>
+                        </div>
                     </li>
                 </a>
             </#list>

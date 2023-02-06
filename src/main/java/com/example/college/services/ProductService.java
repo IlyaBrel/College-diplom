@@ -48,9 +48,11 @@ public class ProductService {
             image3 = toImageEntity(fileProduct3);
             product.addImageToProduct(image3);
         }
+
         log.info("Saving new Product. Title: {}; imageid: {}; Author email: {}", product.getTitle(), product.getPreviewImageId(), product.getUser().getEmail());
         Product productFromDb = productRepository.save(product);
         productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
+
         productRepository.save(product);
     }
 

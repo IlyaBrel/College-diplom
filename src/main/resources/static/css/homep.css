@@ -575,6 +575,18 @@ body {
     grid-gap: 24px;
 
 }
+#content main .box-popular-products li .badge {
+    position: absolute;
+    left: 22px;
+    top: 20px;
+    text-transform: uppercase;
+    font-size: 18px;
+    border-radius: 10px;
+    font-weight: 800;
+    background: red;
+    color: #fff;
+    padding: 3px 10px
+}
 
 #content main .box-popular-products li:hover {
     transform: scale(1.1);
@@ -599,16 +611,27 @@ body {
 
 #content main .box-popular-products li .text-pr h3 {
     margin-top: 25px;
-
     font-weight: 600;
     color: white;
 }
 
-#content main .box-popular-products .text-pr .pr-price {
-    font-size: 16px;
+
+#content main .box-popular-products .product-price{
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+#content main .box-popular-products .product-price .offer-price{
+    font-size: 19px;
     font-weight: 600;
-    color: #ffffff;
-    margin-top: 8px;
+}
+#content main .box-popular-products .product-price .sale-price{
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: line-through;
+    color: var(--grey-pr-info);
+    margin-left: 12px;
 }
 
 #content main .box-popular-products li .text p {
@@ -623,7 +646,7 @@ body {
     height: 50px;
     border-radius: 25px;
     background-color: #333;
-    margin-top: -40px;
+    margin-top: -50px;
     color: #fff;
     float: right;
     font-size: 0;
@@ -647,13 +670,13 @@ body {
 }
 
 @media only screen and (max-width: 1500px) {
-    #content main .box-popular-products li {
+    #content main .box-popular-products li p-c {
         transform: none;
     }
 
     #content main .box-popular-products li .btn-add-b {
         display: block;
-        margin-top: -20px;
+        margin-top: -50px;
     }
 }
 

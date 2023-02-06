@@ -20,7 +20,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 70vh;
 
 }
 
@@ -32,8 +32,22 @@
 .col-6{
     width: 50%;
 }
-
+.badge {
+    position: absolute;
+    left: 4px;
+    top: 20px;
+    text-transform: uppercase;
+    font-size: 23px;
+    border-radius: 10px;
+    font-weight: 800;
+    background: red;
+    color: #fff;
+    padding: 3px 10px;
+}
 .single-product{
+    background: white;
+    box-shadow: 0 0 0px 20px white;
+    border-radius: 10px;
     width: 1080px;
     position: relative;
 }
@@ -89,7 +103,7 @@
 }
 
 .product-image-slider img{
-    width: 90px;
+    width: auto;
     height: 90px;
     background: var(--bg-grey-pr-info);
     padding: 6px;

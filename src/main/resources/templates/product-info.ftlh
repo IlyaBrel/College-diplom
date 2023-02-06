@@ -120,14 +120,21 @@
     <!-- MAIN -->
     <main>
         <div class="container">
+
             <div class="single-product">
+
                 <div class="row">
                     <div class="col-6">
                         <div class="product-image">
                             <div class="product-image-main">
                                 <img src="/images/${product.previewImageId}" alt="" id="product-main-image">
                             </div>
-
+                            <#if product.promotionalPrice != 0 >
+                            <div class="badge">
+                                <#assign discountPercentage = (product.price-product.promotionalPrice)/product.price * 100>
+                                -${discountPercentage?int}%
+                            </div>
+                            </#if>
                             <div class="product-image-slider">
                                 <#list images as img>
                                     <img src="/images/${img.id}" alt="" class="image-list">
@@ -155,8 +162,12 @@
                                 <span class="review">(47 Review)</span>
                             </div>
                             <div class="product-price">
-                                <span class="offer-price">${product.price} р.</span>
-<#--                                <span class="sale-price">$129.00</span>-->
+                                <#if product.promotionalPrice != 0 >
+                                    <span class="offer-price">${product.promotionalPrice} р.</span>
+                                    <span class="sale-price">${product.price} р.</span>
+                                <#else>
+                                    <span class="offer-price">${product.price} р.</span>
+                                </#if>
                             </div>
 
                             <div class="product-details">
@@ -166,23 +177,24 @@
 
                             <div class="product-size">
                                 <h4>Size</h4>
-                                 <#list .vars['product-size'] as size>
-                                <div class="size-layout">
-                                    <input type="radio" name="size" value="${size}" id="${size_index}" class="size-input">
-                                    <label for="${size_index}" class="size">${size}</label>
+                                <#list .vars['product-size'] as size>
+                                    <div class="size-layout">
+                                        <input type="radio" name="size" value="${size}" id="${size_index}"
+                                               class="size-input">
+                                        <label for="${size_index}" class="size">${size}</label>
 
-<#--                                    <input type="radio" name="size" value="M" id="2" class="size-input">-->
-<#--                                    <label for="2" class="size">M</label>-->
+                                        <#--                                    <input type="radio" name="size" value="M" id="2" class="size-input">-->
+                                        <#--                                    <label for="2" class="size">M</label>-->
 
-<#--                                    <input type="radio" name="size" value="L" id="3" class="size-input">-->
-<#--                                    <label for="3" class="size">L</label>-->
+                                        <#--                                    <input type="radio" name="size" value="L" id="3" class="size-input">-->
+                                        <#--                                    <label for="3" class="size">L</label>-->
 
-<#--                                    <input type="radio" name="size" value="XL" id="4" class="size-input">-->
-<#--                                    <label for="4" class="size">XL</label>-->
+                                        <#--                                    <input type="radio" name="size" value="XL" id="4" class="size-input">-->
+                                        <#--                                    <label for="4" class="size">XL</label>-->
 
-<#--                                    <input type="radio" name="size" value="XXL" id="5" class="size-input">-->
-<#--                                    <label for="5" class="size">XXL</label>-->
-                                </div>
+                                        <#--                                    <input type="radio" name="size" value="XXL" id="5" class="size-input">-->
+                                        <#--                                    <label for="5" class="size">XXL</label>-->
+                                    </div>
                                 </#list>
                             </div>
                             <div class="product-color">
@@ -203,6 +215,13 @@
                                 <div class="button buy-now"><i class='bx bxs-zap'></i> Купить сейчас</div>
                                 <div class="button add-cart"><i class='bx bxs-cart'></i> В корзину</div>
                                 <div class="button heart"><i class='bx bxs-heart'></i> Нравится</div>
+<#--                                <form action="/product/delete/${product.id}" method="post"-->
+<#--                                      enctype="multipart/form-data">-->
+<#--                                    <div class="button heart"><i class='bx bx bacet'></i>-->
+<#--                                        <input type="hidden" name="_csrf" value="${_csrf.token}">-->
+<#--                                        <input type="submit" value="Удалить"/>-->
+<#--                                    </div>-->
+<#--                                </form>-->
                             </div>
                         </div>
                     </div>
