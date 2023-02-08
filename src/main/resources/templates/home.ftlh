@@ -197,19 +197,51 @@
                                 <span class="offer-price">${product.price} р.</span>
                             </#if>
                                 </div>
-<#--                        <h4 class="pr-price">${product.price}.00 р-->
-                            <button class="btn-add-b">
-                            <i> <img src="/images/33" height="27px" alt=""/><h4>В корзину</h4></i>
-                        </button>
-                                </h4>
-					</span>
+                    <form action="/cart/${product.id}" method="post" enctype="multipart/form-data">
+                        <button type="submit" class="btn-add-b">
+                         <i>
+                        <img type="submit" src="/images/33" height="27px" alt=""/>
+                        <h4>В корзину</h4></i>
+                             <input type="hidden" name="_csrf" value="${_csrf.token}">
+
+                         </button>
+                    </form>
+<#--                        <input type="submit" value="Добавить в корзину"/>&ndash;&gt;-->
+                        </div>
+
+                        <#--                        <h4 class="pr-price">${product.price}.00 р-->
+                        </h4>
+                        </span>
                         </div>
                     </li>
                 </a>
             </#list>
         </ul>
-
     </main>
+    <table>
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list cart as product>
+            <tr>
+                <td>${product.title}</td>
+                <td>${product.price}</td>
+                <td>
+                    <form action="/cart/remove/${product_index}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}"><input type="submit"
+                                                                                        value="Удалить из в корзину"/>
+                    </form>
+                </td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
+
 
     <!-- MAIN -->
 </section>
