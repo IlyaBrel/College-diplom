@@ -1010,5 +1010,306 @@ body {
     }
 }
 
+#container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 
 
+}
+#myButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1;
+}
+
+/* Оформление панели */
+#checkbox {
+    display: none;
+}
+
+/* Оформление панели правой*/
+#checkbox {
+    display: none;
+}
+
+.panel {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    width: 700px; /*left: -360px;*/ /*для левой панели*/
+    right: -720px; /*для правой панели*/
+    background: white;
+    border-radius: 20px 0 0 20px;
+    transition: all 0.8s;
+    height: 100vh;
+    color: #000000;
+    padding: 40px 20px;
+    font-style: var(--poppins);
+}
+
+.button-1{
+
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1;
+    top: 100px;
+}
+
+.panel-btn-close-a {
+    background-color: #dddddd;
+    border-radius: 4px;
+    border: none;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 16px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.panel-btn-close-a:hover {
+    background-color: #bbbbbb;
+}
+
+.panel-btn-close {
+
+    font-size: 30px;
+    z-index: 1;
+    top: 8px; /*right: 8px;*/ /*для левой панели*/
+    left: 8px; /*для правой панели*/
+    cursor: pointer;
+    color: #000000;
+}
+
+/* Оформление кнопки на странице */
+.button-wrap {
+
+
+    /*border-radius: 30px;*/
+    /*text-align: center;*/
+    /*width: 120px; !*float: right;*! !*для левой панели*!*/
+    /*float: right; !*для правой панели*!*/
+    /*margin: 10px;*/
+}
+
+.button-1 .btn {
+    margin-top: -10px;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background-color: #333;
+    color: #fff;
+    float: right;
+    font-size: 0;
+    box-shadow: 0px 0px 0px 4px #ffffff;
+    right: 15px;
+    top: 900px;
+    text-decoration: none;
+    position: fixed;
+    padding: 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+}
+
+.button-1 .close {
+    display: none;
+}
+
+#checkbox:checked + .panel + .button-wrap .button-1 .open {
+    display: none;
+}
+
+#checkbox:checked + .panel + .button-wrap .button-1 .close {
+    display: block;
+}
+
+#checkbox:checked + .panel { /*left: 0;*/ /*для левой панели*/
+    right: 0; /*для правой панели*/
+}
+
+.panel .shopping-cart {
+    width: 750px;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.panel .shopping-cart .title {
+    height: 60px;
+    border-bottom: 1px solid #E1E8EE;
+    padding: 20px 30px;
+    color: #5E6977;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.panel  .shopping-cart .item {
+    padding: 20px 30px;
+    height: 120px;
+    display: flex;
+}
+
+.panel  .shopping-cart .item:nth-child(3) {
+    border-top:  1px solid #E1E8EE;
+    border-bottom:  1px solid #E1E8EE;
+}
+
+/* Buttons -  Delete and Like */
+.panel  .shopping-cart  .delete-btn {
+
+    display: inline-block;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.panel .shopping-cart .delete-btn .button-delete-card{
+    margin-right: 40px;
+    background-color: #c5c5c5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 13px 17px;
+    font-size: 16px;
+    margin-left: -20px;
+}
+
+
+.panel  .shopping-cart .like-btn {
+    position: absolute;
+    top: 9px;
+    left: 15px;
+    display: inline-block;
+    /*background: url('twitter-heart.png');*/
+    width: 60px;
+    height: 60px;
+    background-size: 2900%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.panel   .shopping-cart .is-active {
+    animation-name: animate;
+    animation-duration: .8s;
+    animation-iteration-count: 1;
+    animation-timing-function: steps(28);
+    animation-fill-mode: forwards;
+}
+
+@keyframes animate {
+    0%   { background-position: left;  }
+    50%  { background-position: right; }
+    100% { background-position: right; }
+}
+
+/* Product Image */
+.panel   .shopping-cart .image {
+    margin-right: 50px;
+}
+
+/* Product Description */
+.panel   .shopping-cart .description {
+    padding-top: 10px;
+    margin-right: 60px;
+    width: 115px;
+}
+
+.panel   .shopping-cart .description span {
+    display: block;
+    font-size: 14px;
+    color: #43484D;
+    font-weight: 400;
+}
+
+.panel   .shopping-cart .description span:first-child {
+    margin-bottom: 5px;
+}
+.panel   .shopping-cart .description span:last-child {
+    font-weight: 300;
+    margin-top: 8px;
+    color: #86939E;
+}
+
+/* Product Quantity */
+.panel   .shopping-cart .quantity {
+    padding-top: 27px;
+    margin-right: 60px;
+}
+.panel   .shopping-cart .quantity input {
+    -webkit-appearance: none;
+    border: none;
+    text-align: center;
+    width: 32px;
+    font-size: 16px;
+    color: #43484D;
+    font-weight: 300;
+}
+
+.panel   .shopping-cart button[class*=btn] {
+    background-color: #E1E8EE;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+.panel   .shopping-cart .minus-btn img {
+    margin-bottom: 3px;
+}
+.panel .plus-btn img {
+    margin-top: 2px;
+}
+.panel  .shopping-cart  button:focus,
+.panel   .shopping-cart input:focus {
+    outline:0;
+}
+
+/* Total Price */
+.panel   .shopping-cart .total-price {
+    width: 83px;
+    padding-top: 27px;
+    text-align: center;
+    font-size: 16px;
+    color: #43484D;
+    font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .panel .shopping-cart {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+    }
+    .panel .item {
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .panel .image img {
+        width: 50%;
+    }
+    .panel .image,
+    .panel .quantity,
+    .panel .description {
+        width: 100%;
+        text-align: center;
+        margin: 6px 0;
+    }
+    .panel .buttons {
+        margin-right: 20px;
+    }
+}

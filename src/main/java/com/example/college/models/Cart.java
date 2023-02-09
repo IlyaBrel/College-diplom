@@ -1,16 +1,16 @@
 package com.example.college.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cart {
-    private List<Product> products = new ArrayList<>();
-
-    public void addProduct(Product product) {
-        products.add(product);
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
+    private Long previewImage;
+    private String title;
+    private String description;
+    private int price;
+    private int promotionalPrice;
 }

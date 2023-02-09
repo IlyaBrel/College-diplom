@@ -1,5 +1,6 @@
 package com.example.college.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,7 +42,9 @@ public class Product {
     private Long previewImageId;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
+    @JsonIgnore
     private User user;
+    @JsonIgnore
     private LocalDateTime dateOfCreated;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Category category;

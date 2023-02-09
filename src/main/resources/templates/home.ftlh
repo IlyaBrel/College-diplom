@@ -11,7 +11,7 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="../static/css/homep.css">
 
-    <title>AdminHub</title>
+    <title>Главная</title>
 </head>
 <body>
 
@@ -206,10 +206,9 @@
 
                          </button>
                     </form>
-<#--                        <input type="submit" value="Добавить в корзину"/>&ndash;&gt;-->
+
                         </div>
 
-                        <#--                        <h4 class="pr-price">${product.price}.00 р-->
                         </h4>
                         </span>
                         </div>
@@ -218,30 +217,71 @@
             </#list>
         </ul>
     </main>
-    <table>
-        <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <#list cart as product>
-            <tr>
-                <td>${product.title}</td>
-                <td>${product.price}</td>
-                <td>
-                    <form action="/cart/remove/${product_index}" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="_csrf" value="${_csrf.token}"><input type="submit"
-                                                                                        value="Удалить из в корзину"/>
-                    </form>
-                </td>
-            </tr>
-        </#list>
-        </tbody>
-    </table>
+    <#--    <table>-->
+    <#--        <thead>-->
+    <#--        <tr>-->
+    <#--            <th>Product Name</th>-->
+    <#--            <th>Price</th>-->
+    <#--            <th>Actions</th>-->
+    <#--        </tr>-->
+    <#--        </thead>-->
+    <#--        <tbody>-->
+    <#--        <#list cart as product>-->
+    <#--            <tr>-->
+    <#--                <td>${product.title}</td>-->
+    <#--                <td>${product.price}</td>-->
+    <#--                <td>-->
+    <#--                    <form action="/cart/remove/${product_index}" method="post" enctype="multipart/form-data">-->
+    <#--                        <input type="hidden" name="_csrf" value="${_csrf.token}"><input type="submit"-->
+    <#--                                                                                        value="Удалить из в корзину"/>-->
+    <#--                    </form>-->
+    <#--                </td>-->
+    <#--            </tr>-->
+    <#--        </#list>-->
+    <#--        </tbody>-->
+    <#--    </table>-->
+    <input type="checkbox" id="checkbox"/>
+    <div class="panel">
+        <div class="shopping-cart" bis_skin_checked="1">
+            <!-- Title -->
+            <div class="title" bis_skin_checked="1">
+                Корзина
+            </div>
+            <!-- Product #1 -->
+            <#list cart as product>
+                <div class="item" bis_skin_checked="1">
+                    <div class="buttons" bis_skin_checked="1">
+                       <form class="delete-btn" action="/cart/remove/${product_index}" method="post" enctype="multipart/form-data">
+                           <input type="hidden" name="_csrf" value="${_csrf.token}"><button type="submit" class="button-delete-card">-</button>
+                            </form>
 
+                    </div>
+
+                    <div class="image" bis_skin_checked="1">
+                        <img src="/images/${product.previewImage}" alt="" height="50px">
+                    </div>
+
+                    <div class="description" bis_skin_checked="1">
+                        <span>${product.title}</span>
+                        <span>White</span>
+                    </div>
+
+                    <div class="quantity">
+                        42
+                    </div>
+
+                    <div class="total-price" bis_skin_checked="1">${product.price}</div>
+                </div>
+            </#list>
+        </div>
+        <button class="panel-btn-close-a">
+            <label class="panel-btn-close" for="checkbox">ЗАКРЫТЬ</label>
+        </button>
+    </div>
+    <div class="button-wrap">
+        <label class="button-1" for="checkbox">
+            <div class="btn open"><img src="/images/33" height="27px" alt=""/></div>
+        </label></div>
 
     <!-- MAIN -->
 </section>
