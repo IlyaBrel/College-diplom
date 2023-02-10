@@ -10,5 +10,5 @@ next-step
 Это продолжение проекта: https://github.com/IlyaBrel/college
 
 
-Корзина(в процессе)09.02.2023
-![image](https://user-images.githubusercontent.com/101255148/217831859-f7b5aabc-a026-4da9-8ba6-868e75dfa43f.png)
+Корзина(в процессе)10.02.2023
+![image](https://user-images.githubusercontent.com/101255148/218108163-cb154c5e-8bbc-458f-9af5-6f2afb29a064.png)
