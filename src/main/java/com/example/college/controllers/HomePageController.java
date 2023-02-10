@@ -43,12 +43,16 @@ public class HomePageController {
     @GetMapping("/")
     public String homePage(@RequestParam(name = "title", required = false) String title, Model model, Principal principal, HttpServletRequest request, HttpServletResponse response) {
         List<Cart> cart = getCartFromCookie(request);
+        int totalPrice = 0;
 
+        for (Cart cartList : cart) {
+            totalPrice += cartList.getPrice();
+        }
         model.addAttribute("categorys", categoryService.findAll(title));
         model.addAttribute("products", productService.listProducts(title));
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("cart", cart);
-
+        model.addAttribute("totalPrice",totalPrice );
         saveCartToCookie(response, cart);
         return "home";
     }
@@ -65,6 +69,7 @@ public class HomePageController {
         cartToProduct.setPrice(product.getPrice());
         cartToProduct.setPromotionalPrice(product.getPromotionalPrice());
         cart.add(cartToProduct);
+
         saveCartToCookie(response, cart);
         return "redirect:/";
     }
@@ -73,6 +78,7 @@ public class HomePageController {
     public String removeFromCart(@PathVariable("index") int index, HttpServletRequest request, HttpServletResponse response) {
         List<Cart> cart = getCartFromCookie(request);
         cart.remove(index);
+
         saveCartToCookie(response, cart);
 
         return "redirect:/";
@@ -108,4 +114,6 @@ public class HomePageController {
             log.error("Failed to encode cart value", e);
         }
     }
+
+
 }

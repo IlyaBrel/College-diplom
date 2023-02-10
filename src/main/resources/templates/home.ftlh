@@ -242,42 +242,66 @@
     <#--    </table>-->
     <input type="checkbox" id="checkbox"/>
     <div class="panel">
-        <div class="shopping-cart" bis_skin_checked="1">
+        <div class="start">
+            <div class="shopping-cart" bis_skin_checked="1">
+                <!-- Title -->
+                <div class="title" bis_skin_checked="1">
+                    Корзина
+                </div>
+                <!-- Product #1 -->
+                <#list cart as product>
+                    <div class="item">
+                        <div class="buttons">
+                            <form class="delete-btn" action="/cart/remove/${product_index}" method="post"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                <button type="submit" class="button-delete-card">-</button>
+                            </form>
+                        </div>
+                        <div class="image">
+                            <img class="image-p" src="/images/${product.previewImage}" alt="">
+                        </div>
+                        <div class="description">
+                            <span>${product.title}</span>
+                            <span>42</span>
+                            <span>White</span>
+                        </div>
+                        <div class="total">
+                            <span>${product.price} р.</span></div>
+                    </div>
+                </#list>
+            </div>
+        </div>
+
+        <div class="shopping-cart-end" bis_skin_checked="1">
             <!-- Title -->
-            <div class="title" bis_skin_checked="1">
-                Корзина
+            <div class="price">Итоговая цена: ${.vars['totalPrice']} р.</div>
+            <div class="buttons">
+                <div class="back">
+                    <label class="panel-btn-close" for="checkbox"><i class='bx bx-chevrons-left'></i>
+                    <style>
+                        .bx bx-chevrons-left {
+                            min-width: calc(60px - ((4px + 6px) * 2));
+                            display: flex;
+                            justify-content: center;
+                        }
+                    </style></label>
+                </div>
+                <button class="checkout">Оформить заказ</button><br>
+
             </div>
             <!-- Product #1 -->
-            <#list cart as product>
-                <div class="item" bis_skin_checked="1">
-                    <div class="buttons" bis_skin_checked="1">
-                       <form class="delete-btn" action="/cart/remove/${product_index}" method="post" enctype="multipart/form-data">
-                           <input type="hidden" name="_csrf" value="${_csrf.token}"><button type="submit" class="button-delete-card">-</button>
-                            </form>
-
-                    </div>
-
-                    <div class="image" bis_skin_checked="1">
-                        <img src="/images/${product.previewImage}" alt="" height="50px">
-                    </div>
-
-                    <div class="description" bis_skin_checked="1">
-                        <span>${product.title}</span>
-                        <span>White</span>
-                    </div>
-
-                    <div class="quantity">
-                        42
-                    </div>
-
-                    <div class="total-price" bis_skin_checked="1">${product.price}</div>
-                </div>
-            </#list>
         </div>
-        <button class="panel-btn-close-a">
-            <label class="panel-btn-close" for="checkbox">ЗАКРЫТЬ</label>
-        </button>
     </div>
+
+    </div>
+    <#--        <div class="bottom-panel">-->
+    <#--            <div id="price">The price of the whole basket: <span id="total"> ${.vars['totalPrice']} р.</span>-->
+    <#--                <span class="divider"></span>-->
+
+    <#--        </div>-->
+
+
     <div class="button-wrap">
         <label class="button-1" for="checkbox">
             <div class="btn open"><img src="/images/33" height="27px" alt=""/></div>
