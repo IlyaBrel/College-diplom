@@ -130,10 +130,10 @@
                                 <img src="/images/${product.previewImageId}" alt="" id="product-main-image">
                             </div>
                             <#if product.promotionalPrice != 0 >
-                            <div class="badge">
-                                <#assign discountPercentage = (product.price-product.promotionalPrice)/product.price * 100>
-                                -${discountPercentage?int}%
-                            </div>
+                                <div class="badge">
+                                    <#assign discountPercentage = (product.price-product.promotionalPrice)/product.price * 100>
+                                    -${discountPercentage?int}%
+                                </div>
                             </#if>
                             <div class="product-image-slider">
                                 <#list images as img>
@@ -213,15 +213,15 @@
 
                             <div class="product-btn-group">
                                 <div class="button buy-now"><i class='bx bxs-zap'></i> Купить сейчас</div>
-                                <div class="button add-cart"><i class='bx bxs-cart'></i> В корзину</div>
+                                <form action="/cart/add/${product.id}" method="post" enctype="multipart/form-data">
+                                    <button type="submit">
+                                        <div class="button add-cart" type="submit"><i class='bx bxs-cart'>
+                                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                            </i> В корзину
+                                        </div>
+                                    </button>
+                                </form>
                                 <div class="button heart"><i class='bx bxs-heart'></i> Нравится</div>
-<#--                                <form action="/product/delete/${product.id}" method="post"-->
-<#--                                      enctype="multipart/form-data">-->
-<#--                                    <div class="button heart"><i class='bx bx bacet'></i>-->
-<#--                                        <input type="hidden" name="_csrf" value="${_csrf.token}">-->
-<#--                                        <input type="submit" value="Удалить"/>-->
-<#--                                    </div>-->
-<#--                                </form>-->
                             </div>
                         </div>
                     </div>
@@ -331,20 +331,3 @@
 </script>
 </body>
 </html>
-<#--<html>-->
-<#--<head>-->
-<#--    <title>BUYSELL</title>-->
-<#--</head>-->
-<#--<body>-->
-<#--<h1>BUYSELL</h1><hr>-->
-<#--<h4>Подробная информация о товаре</h4>-->
-<#--<#list images as img>-->
-<#--    <img src="/images/${img.id}" height="60px"/><br><br>-->
-<#--</#list>-->
-<#--<b>Название товара: </b>${product.title}<br>-->
-<#--<b>Описание товара: </b>${product.description}<br>-->
-<#--<b>Цена: </b>${product.price}<br>-->
-<#--<b>Город: </b>${product.city}<br>-->
-<#--<b>Автор: </b><a href="/user/${product.user.id}">${product.user.name}</a><br>-->
-<#--</body>-->
-<#--</html>-->

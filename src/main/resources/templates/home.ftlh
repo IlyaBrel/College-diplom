@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-      xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -116,43 +116,20 @@
     <!-- MAIN -->
     <main>
 
-
         <div class="slider-container">
             <div class="slider">
                 <div class="slide">
                     <div class="text-container">
-                        <h3>Новость 1</h3>
-                        <p>Внутренний текст</p>
+                        <h3>-50% на всё</h3>
+                        <p>Скидки на все виды товаров</p>
                         <button class="more-btn">Подробнее...</button>
                     </div>
                     <div class="img-container">
-                        <img class="img-sl" src="/images/29" alt="Image 2">
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="text-container">
-                        <h3>Новость 2</h3>
-                        <p>Внутренний текст</p>
-                        <button class="more-btn">Подробнее...</button>
-                    </div>
-                    <div class="img-container">
-                        <img class="img-sl" src="/images/29" alt="Image 2">
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="text-container">
-                        <h3>Новость 3</h3>
-                        <p>Внутренний текст</p>
-                        <button class="more-btn">Подробнее...</button>
-                    </div>
-                    <div class="img-container">
-                        <img class="img-sl" src="/images/29" alt="Image 2">
+                        <img class="img-sl" src="/images/46" alt="Image 2">
                     </div>
                 </div>
             </div>
         </div>
-
-
         </div>
         <ul class="box-category">
             <#list categorys as category>
@@ -197,15 +174,15 @@
                                 <span class="offer-price">${product.price} р.</span>
                             </#if>
                                 </div>
-                    <form action="/cart/${product.id}" method="post" enctype="multipart/form-data">
-                        <button type="submit" class="btn-add-b">
-                         <i>
-                        <img type="submit" src="/images/33" height="27px" alt=""/>
-                        <h4>В корзину</h4></i>
-                             <input type="hidden" name="_csrf" value="${_csrf.token}">
+<#--                    <form action="/cart/${product.id}" method="post" enctype="multipart/form-data">-->
+<#--                        <button type="submit" class="btn-add-b">-->
+<#--                         <i>-->
+<#--                        <img type="submit" src="/images/33" height="27px" alt=""/>-->
+<#--                        <h4>В корзину</h4></i>-->
+<#--                             <input type="hidden" name="_csrf" value="${_csrf.token}">-->
 
-                         </button>
-                    </form>
+<#--                         </button>-->
+<#--                    </form>-->
 
                         </div>
 
@@ -252,9 +229,8 @@
                 <#list cart as product>
                     <div class="item">
                         <div class="buttons">
-                            <form class="delete-btn" action="/cart/remove/${product_index}" method="post"
+                            <form class="delete-btn" action="/cart/delete/${product_index}" method="post"
                                   enctype="multipart/form-data">
-                                <input type="hidden" name="_csrf" value="${_csrf.token}">
                                 <button type="submit" class="button-delete-card">-</button>
                             </form>
                         </div>
@@ -275,19 +251,21 @@
 
         <div class="shopping-cart-end" bis_skin_checked="1">
             <!-- Title -->
-            <div class="price">Итоговая цена: ${.vars['totalPrice']} р.</div>
+            <div class="price">Итоговая цена:</div>
             <div class="buttons">
                 <div class="back">
                     <label class="panel-btn-close" for="checkbox"><i class='bx bx-chevrons-left'></i>
-                    <style>
-                        .bx bx-chevrons-left {
-                            min-width: calc(60px - ((4px + 6px) * 2));
-                            display: flex;
-                            justify-content: center;
-                        }
-                    </style></label>
+                        <style>
+                            .bx bx-chevrons-left {
+                                min-width: calc(60px - ((4px + 6px) * 2));
+                                display: flex;
+                                justify-content: center;
+                            }
+                        </style>
+                    </label>
                 </div>
-                <button class="checkout">Оформить заказ</button><br>
+                <button class="checkout">Оформить заказ</button>
+                <br>
 
             </div>
             <!-- Product #1 -->
