@@ -38,8 +38,6 @@ public class HomePageController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final CartUtil cartUtil;
-    private static final String CART_COOKIE_NAME = "cart";
-    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @GetMapping("/")
     public String homePage(@RequestParam(name = "title", required = false) String title, Model model, Principal principal, HttpServletRequest request, HttpServletResponse response) {

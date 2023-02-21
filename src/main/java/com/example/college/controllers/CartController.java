@@ -18,7 +18,6 @@ import java.io.IOException;
 public class CartController {
 
     private final CartUtil cartUtil;
-    private ProductService productService;
 
 
     @PostMapping("/add/{id}")
@@ -27,6 +26,7 @@ public class CartController {
         return referer(request,response);
 
     }
+
     @PostMapping("/delete/{index}")
     public String deleteCartItem(@PathVariable("index") int index, HttpServletRequest request, HttpServletResponse response) {
         cartUtil.removeFromCart(index,request,response);

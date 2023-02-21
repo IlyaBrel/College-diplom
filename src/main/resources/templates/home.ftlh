@@ -125,7 +125,7 @@
                         <button class="more-btn">Подробнее...</button>
                     </div>
                     <div class="img-container">
-                        <img class="img-sl" src="/images/46" alt="Image 2">
+                        <img class="img-sl" src="/images/31" alt="Image 2">
                     </div>
                 </div>
             </div>
@@ -147,7 +147,9 @@
 
         <div class="head-title">
             <div class="left">
-                <h1>Популярные товары</h1>
+                <h1>Популярные товары
+                    <div class="badge-under-text"></div>
+                </h1>
             </div>
         </div>
 
@@ -175,14 +177,14 @@
                             </#if>
                                 </div>
 <#--                    <form action="/cart/${product.id}" method="post" enctype="multipart/form-data">-->
-<#--                        <button type="submit" class="btn-add-b">-->
-<#--                         <i>-->
-<#--                        <img type="submit" src="/images/33" height="27px" alt=""/>-->
-<#--                        <h4>В корзину</h4></i>-->
-<#--                             <input type="hidden" name="_csrf" value="${_csrf.token}">-->
+                                <#--                        <button type="submit" class="btn-add-b">-->
+                                <#--                         <i>-->
+                                <#--                        <img type="submit" src="/images/33" height="27px" alt=""/>-->
+                                <#--                        <h4>В корзину</h4></i>-->
+                                <#--                             <input type="hidden" name="_csrf" value="${_csrf.token}">-->
 
-<#--                         </button>-->
-<#--                    </form>-->
+                                <#--                         </button>-->
+                                <#--                    </form>-->
 
                         </div>
 
@@ -225,13 +227,13 @@
                 <div class="title" bis_skin_checked="1">
                     Корзина
                 </div>
-                <!-- Product #1 -->
                 <#list cart as product>
                     <div class="item">
                         <div class="buttons">
                             <form class="delete-btn" action="/cart/delete/${product_index}" method="post"
                                   enctype="multipart/form-data">
                                 <button type="submit" class="button-delete-card">-</button>
+                                <input type="hidden" name="_csrf" value="${_csrf.token}">
                             </form>
                         </div>
                         <div class="image">

@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +35,7 @@ public class CartUtil {
         return cart;
     }
 
-    public List<Cart> addToCart(@PathVariable Long id,HttpServletRequest request, HttpServletResponse response) {
+    public void addToCart(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
         List<Cart> cart = getCartFromCookie(request);
         Product product = productService.getProductById(id);
         Cart cartToProduct = new Cart();
@@ -47,7 +46,6 @@ public class CartUtil {
         cartToProduct.setPromotionalPrice(product.getPromotionalPrice());
         cart.add(cartToProduct);
         saveCartToCookie(response, cart);
-        return cart;
     }
 
     public List<Cart> removeFromCart(@PathVariable("index") int index, HttpServletRequest request, HttpServletResponse response) {
