@@ -24,7 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/","/home/**", "/product/**", "/images/**", "/registration", "/user/**",
                         "/static/css/style.css","/static/css/nikeImg.png", "/category/**" ,
-                        "/home/**","/static/css/homep.css", "/static/css/product-info-css.css","/product/create","/dimensions", "/favicon.ico", "/cart/**")
+                        "/home/**","/static/css/homep.css", "/static/css/product-info-css.css",
+                        "/product/create","/dimensions", "/favicon.ico", "/cart/**",
+                        "https://i.ibb.co/brq1tJj/shopping-cart.png"
+                        )
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

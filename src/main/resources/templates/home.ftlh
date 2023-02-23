@@ -36,7 +36,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/products">
                 <i class='bx bxs-doughnut-chart'></i>
                 <span class="text">Товары</span>
             </a>
@@ -154,7 +154,9 @@
         </div>
 
         <ul class="box-popular-products">
+
             <#list products as product>
+                  <#if product_index < 5>
                 <a href="/product/${product.id}">
                     <li>
                         <#if product.promotionalPrice != 0 >
@@ -193,32 +195,11 @@
                         </div>
                     </li>
                 </a>
+                </#if>
             </#list>
         </ul>
     </main>
-    <#--    <table>-->
-    <#--        <thead>-->
-    <#--        <tr>-->
-    <#--            <th>Product Name</th>-->
-    <#--            <th>Price</th>-->
-    <#--            <th>Actions</th>-->
-    <#--        </tr>-->
-    <#--        </thead>-->
-    <#--        <tbody>-->
-    <#--        <#list cart as product>-->
-    <#--            <tr>-->
-    <#--                <td>${product.title}</td>-->
-    <#--                <td>${product.price}</td>-->
-    <#--                <td>-->
-    <#--                    <form action="/cart/remove/${product_index}" method="post" enctype="multipart/form-data">-->
-    <#--                        <input type="hidden" name="_csrf" value="${_csrf.token}"><input type="submit"-->
-    <#--                                                                                        value="Удалить из в корзину"/>-->
-    <#--                    </form>-->
-    <#--                </td>-->
-    <#--            </tr>-->
-    <#--        </#list>-->
-    <#--        </tbody>-->
-    <#--    </table>-->
+    <#if user.email??>
     <input type="checkbox" id="checkbox"/>
     <div class="panel">
         <div class="start">
@@ -232,8 +213,8 @@
                         <div class="buttons">
                             <form class="delete-btn" action="/cart/delete/${product_index}" method="post"
                                   enctype="multipart/form-data">
-                                <button type="submit" class="button-delete-card">-</button>
                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                <button type="submit" class="button-delete-card">-</button>
                             </form>
                         </div>
                         <div class="image">
@@ -284,8 +265,19 @@
 
     <div class="button-wrap">
         <label class="button-1" for="checkbox">
-            <div class="btn open"><img src="/images/33" height="27px" alt=""/></div>
+            <div class="btn open"><img src="https://i.ibb.co/brq1tJj/shopping-cart.png"  height="27px" alt=""/></div>
         </label></div>
+    <#else>
+        <style>
+            .panel{
+                visibility: hidden;
+            }
+            .button-wrap{
+                visibility: hidden;
+            }
+        </style>
+</#if>
+
 
     <!-- MAIN -->
 </section>
