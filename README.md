@@ -12,3 +12,4 @@ next-step
 
 Корзина(в процессе)10.02.2023
 ![image](https://user-images.githubusercontent.com/101255148/218108163-cb154c5e-8bbc-458f-9af5-6f2afb29a064.png)
+![image](https://user-images.githubusercontent.com/101255148/220926879-fed5faa6-d8ad-41f8-8e2a-6b291e185b37.png)
