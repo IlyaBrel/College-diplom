@@ -97,8 +97,8 @@
         <a href="#" class="nav-link">Главная</a>
         <form action="#">
             <div class="form-input">
-                <input type="search" placeholder="Search...">
-                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                <#--                <input type="search" placeholder="Search...">-->
+                <#--                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>-->
             </div>
         </form>
         <input type="checkbox" id="switch-mode" hidden>
@@ -115,7 +115,47 @@
 
     <!-- MAIN -->
     <main>
+        <div class="filters">
+            <div class="dropdown">
+                <button class="filter-button">Фильтры</button>
+                <div class="dropdown-content">
+                    <form class="form-filter">
+                        <div>
+                            <h3>По категориям</h3>
+                        <#list category as category_filter>
+                                <div>
+                                    <label class="lable-f-c"><input id="category" type="checkbox" name="category" value="${category_filter.id}">${category_filter.name}</label>
+                                    <style>
+                                        .lable-f-c{
+                                         margin: 20px;
+                                        }
+                                        #category{
+                                            margin-right: 10px;
+                                        }
+                                    </style>
+                                </div>
+                        </#list>
+                        </div>
+                        <div>
+                        <label for="filter2"><input type="checkbox" id="filter2">Filter 2</label>
+                        </div>
+                        <div>
+                        <label for="filter3"><input type="checkbox" id="filter3">Filter 3</label>
+                        </div>
+                    </form>
+                    <button class="save-btn">Save HTML</button>
+                </div>
+            </div>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+        </div>
+
         <ul class="box-popular-products">
+
             <#list products as product>
                 <a href="/product/${product.id}">
                     <li>
@@ -164,29 +204,6 @@
             </#list>
         </ul>
     </main>
-    <#--    <table>-->
-    <#--        <thead>-->
-    <#--        <tr>-->
-    <#--            <th>Product Name</th>-->
-    <#--            <th>Price</th>-->
-    <#--            <th>Actions</th>-->
-    <#--        </tr>-->
-    <#--        </thead>-->
-    <#--        <tbody>-->
-    <#--        <#list cart as product>-->
-    <#--            <tr>-->
-    <#--                <td>${product.title}</td>-->
-    <#--                <td>${product.price}</td>-->
-    <#--                <td>-->
-    <#--                    <form action="/cart/remove/${product_index}" method="post" enctype="multipart/form-data">-->
-    <#--                        <input type="hidden" name="_csrf" value="${_csrf.token}"><input type="submit"-->
-    <#--                                                                                        value="Удалить из в корзину"/>-->
-    <#--                    </form>-->
-    <#--                </td>-->
-    <#--            </tr>-->
-    <#--        </#list>-->
-    <#--        </tbody>-->
-    <#--    </table>-->
     <input type="checkbox" id="checkbox"/>
     <div class="panel">
         <div class="start">
