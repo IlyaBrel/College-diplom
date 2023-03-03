@@ -34,7 +34,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String admin(@RequestParam(name = "title", required = false) String title, Model model) {
         model.addAttribute("users", userService.list());
-        model.addAttribute("category", categoryService.findAll(title));
+        model.addAttribute("category", categoryService.findAll());
         model.addAttribute("products", productService.listProducts(title));
         return "admin";
     }

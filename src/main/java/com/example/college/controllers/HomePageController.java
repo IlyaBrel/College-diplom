@@ -41,7 +41,7 @@ public class HomePageController {
 
     @GetMapping("/")
     public String homePage(@RequestParam(name = "title", required = false) String title, Model model, Principal principal, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("categorys", categoryService.findAll(title));
+        model.addAttribute("categorys", categoryService.findAll());
         model.addAttribute("products", productService.listProducts(title));
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("cart", cartUtil.getCart(request,response));

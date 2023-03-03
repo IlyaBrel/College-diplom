@@ -28,7 +28,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void saveProduct(Principal principal, Product product, MultipartFile fileProduct1, MultipartFile fileProduct2, MultipartFile fileProduct3,String dimensions) throws IOException {
+    public void saveProduct(Principal principal, Product product, MultipartFile fileProduct1, MultipartFile fileProduct2, MultipartFile fileProduct3, String dimensions) throws IOException {
         product.setUser(getUserByPrincipal(principal));
 //        product.setPopular(false);
         Image image1;
@@ -55,6 +55,21 @@ public class ProductService {
 
         productRepository.save(product);
     }
+
+    public List<Product> getProductsByFilter(String title, String city, Long categoryId) {
+        if (title == null) {
+            title = "";
+            productRepository.findAll();
+        }else if (city == null && categoryId == null) {
+            // If all parameters are null, return all products
+            return productRepository.findAll();
+        } else if (city != null && categoryId != null) {
+            // If all parameters are not null, use all three parameters in the query
+            return productRepository.findByTitleContainingAndCityContainingAndCategoryId(title, city, categoryId);
+        }
+       return productRepository.findByTitleContainingAndCityContainingAndCategoryId(title, city, categoryId);
+    }
+
 
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();

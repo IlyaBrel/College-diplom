@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,9 +25,13 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public String products(@RequestParam(name = "title", required = false) String title, Principal principal, Model model, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("category", categoryService.findAll(title));
-        model.addAttribute("products", productService.listProducts(title));
+    public String products(@RequestParam(name = "title", required = false) String title,
+            @RequestParam(name = "city", required = false) String city,
+            @RequestParam(name = "category", required = false) Long categoryId,
+            Principal principal, Model model, HttpServletRequest request, HttpServletResponse response) {
+
+        model.addAttribute("category", categoryService.findAll());
+        model.addAttribute("products", productService.getProductsByFilter(title, city, categoryId));
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("cart", cartUtil.getCart(request, response));
         return "products";

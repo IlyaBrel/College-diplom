@@ -31,7 +31,7 @@ public class CategoryService {
         return categoryRepository.findAll(PageRequest.of(0, 6));
     }
 
-    public List<Category> findAll(String title) {
+    public List<Category> findAll() {
         return categoryRepository.findAll();
     }
 

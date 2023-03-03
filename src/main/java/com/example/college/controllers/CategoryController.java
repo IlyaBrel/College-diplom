@@ -22,7 +22,7 @@ public class CategoryController {
 
     @GetMapping("/category")
     public String categorys(@RequestParam(name = "title", required = false) String title, Model model) {
-        model.addAttribute("category", categoryService.findAll(title));
+        model.addAttribute("category", categoryService.findAll());
         return "categorys";
     }
 

@@ -116,45 +116,65 @@
     <!-- MAIN -->
     <main>
         <div class="filters">
+
             <div class="dropdown">
                 <button class="filter-button">Фильтры</button>
                 <div class="dropdown-content">
                     <form class="form-filter">
                         <div>
                             <h3>По категориям</h3>
-                        <#list category as category_filter>
+                            <#list category as category_filter>
                                 <div>
-                                    <label class="lable-f-c"><input id="category" type="checkbox" name="category" value="${category_filter.id}">${category_filter.name}</label>
+                                    <label class="lable-f-c"><input id="category" type="checkbox" name="category"
+                                                                    value="${category_filter.id}">${category_filter.name}
+                                    </label>
                                     <style>
-                                        .lable-f-c{
-                                         margin: 20px;
+                                        .lable-f-c {
+                                            margin: 20px;
                                         }
-                                        #category{
+
+                                        #category {
                                             margin-right: 10px;
                                         }
                                     </style>
                                 </div>
-                        </#list>
+                            </#list>
                         </div>
                         <div>
-                        <label for="filter2"><input type="checkbox" id="filter2">Filter 2</label>
+                            <label for="filter2"><input type="checkbox" id="filter2">Filter 2</label>
                         </div>
                         <div>
-                        <label for="filter3"><input type="checkbox" id="filter3">Filter 3</label>
+                            <label for="filter3"><input type="checkbox" id="filter3">Filter 3</label>
                         </div>
                     </form>
                     <button class="save-btn">Save HTML</button>
                 </div>
             </div>
-            <form action="#">
+            <form action="/products" method="get">
                 <div class="form-input">
-                    <input type="search" placeholder="Search...">
+                    <input type="text" id="title" name="title" placeholder="Поиск...">
                     <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
                 </div>
             </form>
         </div>
 
         <ul class="box-popular-products">
+
+            <#--            <label for="title">Title:</label>-->
+            <#--            <input type="text" id="title" name="title">-->
+            <#--            <br>-->
+            <#--            <label for="city">City:</label>-->
+            <#--            <input type="text" id="city" name="city">-->
+            <#--            <br>-->
+            <#--            <label for="category">Category:</label>-->
+            <#--            <select id="category" name="category">-->
+            <#--                <option value="">All</option>-->
+            <#--                <#list category as category>-->
+            <#--                    <option value="${category.id}">${category.name}</option>-->
+            <#--                </#list>-->
+            <#--            </select>-->
+            <#--            <br>-->
+
 
             <#list products as product>
                 <a href="/product/${product.id}">
