@@ -13,8 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -24,12 +25,19 @@ public class ProductService {
     private final UserRepository userRepository;
 
     public List<Product> listProducts(String title) {
-        if (title != null) return productRepository.findByTitle(title);
-        return productRepository.findAll();
+        return title != null ? productRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(title, title) : productRepository.findAll();
     }
 
-    public void saveProduct(Principal principal, Product product, MultipartFile fileProduct1, MultipartFile fileProduct2, MultipartFile fileProduct3, String dimensions) throws IOException {
+    public void saveProduct(Principal principal, Product product,
+                            MultipartFile fileProduct1, MultipartFile fileProduct2, MultipartFile fileProduct3,
+                            List<String> dimension,List<Integer> quantities) throws IOException {
         product.setUser(getUserByPrincipal(principal));
+
+        Map<String, Integer> dimensions = new HashMap<>();
+        for (int i = 0; i < dimension.size(); i++) {
+            dimensions.put(dimension.get(i), quantities.get(i));
+        }
+        product.setDimensions(dimensions);
 //        product.setPopular(false);
         Image image1;
         Image image2;
@@ -52,23 +60,22 @@ public class ProductService {
         log.info("Saving new Product. Title: {}; imageid: {}; Author email: {}", product.getTitle(), product.getPreviewImageId(), product.getUser().getEmail());
         Product productFromDb = productRepository.save(product);
         productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
-
         productRepository.save(product);
     }
 
-    public List<Product> getProductsByFilter(String title, String city, Long categoryId) {
-        if (title == null) {
-            title = "";
-            productRepository.findAll();
-        }else if (city == null && categoryId == null) {
-            // If all parameters are null, return all products
-            return productRepository.findAll();
-        } else if (city != null && categoryId != null) {
-            // If all parameters are not null, use all three parameters in the query
-            return productRepository.findByTitleContainingAndCityContainingAndCategoryId(title, city, categoryId);
-        }
-       return productRepository.findByTitleContainingAndCityContainingAndCategoryId(title, city, categoryId);
-    }
+//    public List<Product> getProductsByFilter(String title, String city, Long categoryId) {
+//        if (title == null) {
+//            title = "";
+//            productRepository.findAll();
+//        }else if (city == null && categoryId == null) {
+//            // If all parameters are null, return all products
+//            return productRepository.findAll();
+//        } else if (city != null && categoryId != null) {
+//            // If all parameters are not null, use all three parameters in the query
+//            return productRepository.findByTitleContainingAndCityContainingAndCategoryId(title, city, categoryId);
+//        }
+//       return productRepository.findByTitleContainingAndCityContainingAndCategoryId(title, city, categoryId);
+//    }
 
 
     public User getUserByPrincipal(Principal principal) {

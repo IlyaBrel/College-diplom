@@ -31,8 +31,9 @@ public class ProductController {
             Principal principal, Model model, HttpServletRequest request, HttpServletResponse response) {
 
         model.addAttribute("category", categoryService.findAll());
-        model.addAttribute("products", productService.getProductsByFilter(title, city, categoryId));
+        model.addAttribute("products", productService.listProducts(title));
         model.addAttribute("user", productService.getUserByPrincipal(principal));
+
         model.addAttribute("cart", cartUtil.getCart(request, response));
         return "products";
     }
@@ -41,9 +42,9 @@ public class ProductController {
     public String productInfo(@PathVariable Long id, Model model, Principal principal) {
         Product product = productService.getProductById(id);
         model.addAttribute("product", product);
-        model.addAttribute("product-size", product.getDimensions());
         model.addAttribute("images", product.getImages());
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         return "product-info";
     }
+
 }

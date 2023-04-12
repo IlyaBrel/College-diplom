@@ -23,7 +23,7 @@
         <span class="text">BELLSELL</span>
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="/">
                 <i class='bx bxs-dashboard'></i>
                 <span class="text">Главная</span>
@@ -35,8 +35,8 @@
                 <span class="text">Категории</span>
             </a>
         </li>
-        <li>
-            <a href="#">
+        <li class="active">
+            <a href="/products">
                 <i class='bx bxs-doughnut-chart'></i>
                 <span class="text">Товары</span>
             </a>
@@ -115,67 +115,146 @@
 
     <!-- MAIN -->
     <main>
-        <div class="filters">
-
-            <div class="dropdown">
-                <button class="filter-button">Фильтры</button>
-                <div class="dropdown-content">
-                    <form class="form-filter">
-                        <div>
-                            <h3>По категориям</h3>
-                            <#list category as category_filter>
-                                <div>
-                                    <label class="lable-f-c"><input id="category" type="checkbox" name="category"
-                                                                    value="${category_filter.id}">${category_filter.name}
-                                    </label>
-                                    <style>
-                                        .lable-f-c {
-                                            margin: 20px;
-                                        }
-
-                                        #category {
-                                            margin-right: 10px;
-                                        }
-                                    </style>
-                                </div>
-                            </#list>
-                        </div>
-                        <div>
-                            <label for="filter2"><input type="checkbox" id="filter2">Filter 2</label>
-                        </div>
-                        <div>
-                            <label for="filter3"><input type="checkbox" id="filter3">Filter 3</label>
-                        </div>
-                    </form>
-                    <button class="save-btn">Save HTML</button>
-                </div>
+        <form action="/products" method="get">
+            <div class="form-input">
+                <input type="text" id="title" name="title" placeholder="Поиск...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
             </div>
-            <form action="/products" method="get">
-                <div class="form-input">
-                    <input type="text" id="title" name="title" placeholder="Поиск...">
-                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
-                </div>
-            </form>
+        </form>
+        <div class="filters-dropdown">
+            <div class="checkbox-dropdown">
+                Категория
+                <ul class="checkbox-dropdown-list">
+                    <#list category as category>
+                    <li>
+                        <label>
+                            <input type="checkbox" value="Vejle" name="city"/>${category.name}</label>
+                    </li>
+                    </#list>
+                </ul>
+            </div>
+            <div class="checkbox-dropdown">
+                Бренд
+                <ul class="checkbox-dropdown-list">
+                    <li>
+                        <label>
+                            <input type="checkbox" value="Vejle" name="city"/>Milwaukee</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="checkbox-dropdown">
+                Размер
+                <ul class="checkbox-dropdown-list">
+                    <li>
+                        <label>
+                            <input type="checkbox" value="Vejle" name="city"/>Milwaukee</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="checkbox-dropdown">
+                Цвет
+                <ul class="checkbox-dropdown-list">
+                    <li>
+                        <label>
+                            <input type="checkbox" value="Vejle" name="city"/>Milwaukee</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="checkbox-dropdown">
+                Цена
+                <ul class="checkbox-dropdown-list">
+                    <li>
+                        <label>
+                            <input type="checkbox" value="Vejle" name="city"/>Milwaukee</label>
+                    </li>
+                </ul>
+            </div>
+            <style>
+                /* CSS код */
+                .checkbox-dropdown {
+                    font-family: 'Montserrat', sans-serif;
+                    border-radius: 10px;
+                    width: 200px;
+                    border: 1px solid var(--blue);
+
+                    padding: 10px;
+                    position: relative;
+                    z-index: 9999;
+                    background: var(--blue);
+                    color: var(--light);
+                    margin: 10px;
+                    user-select: none;
+                    cursor: pointer; /* добавляем курсор-указатель при наведении */
+                }
+
+                /* Display CSS arrow to the right of the dropdown text */
+                .checkbox-dropdown:after {
+                    content: '';
+                    height: 0;
+                    position: absolute;
+                    width: 0;
+                    border: 6px solid transparent;
+                    border-top-color: #000;
+                    top: 50%;
+                    right: 10px;
+                    margin-top: -3px;
+                }
+
+                /* Reverse the CSS arrow when the dropdown is active */
+                .checkbox-dropdown:hover:after { /* меняем псевдокласс на hover, чтобы выпадающее меню открывалось при наведении */
+                    border-bottom-color: #000;
+                    border-top-color: #fff;
+                    margin-top: -9px;
+                    border-radius: 10px 10px 0 0;
+
+                }
+
+                .checkbox-dropdown-list {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    position: absolute;
+                    top: 100%; /* align the dropdown right below the dropdown text */
+                    border: inherit;
+                    border-top: none;
+                    left: -1px; /* align the dropdown to the left */
+                    right: -1px; /* align the dropdown to the right */
+                    opacity: 0; /* hide the dropdown */
+                    transition: opacity 0.4s ease-in-out;
+                    height: auto;
+                    overflow-x: hidden;
+                    pointer-events: none; /* avoid mouse click events inside the dropdown */
+                    background: var(--light);
+                    border-radius: 10px;
+                }
+
+                .checkbox-dropdown:hover .checkbox-dropdown-list { /* меняем псевдокласс на hover, чтобы выпадающее меню открывалось при наведении */
+                    opacity: 1; /* display the dropdown */
+                    pointer-events: auto; /* make sure that the user still can select checkboxes */
+                }
+
+                .checkbox-dropdown-list li label {
+                    color: black;
+                    display: block;
+                    border-bottom: 1px solid #000000;
+                    padding: 10px;
+                    transition: all 0.2s ease-out;
+                }
+
+                .checkbox-dropdown-list li label:hover {
+                    background-color: #618ef6;
+                    color: white;
+                }
+                .filters-dropdown{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            </style>
+        </div>
         </div>
 
         <ul class="box-popular-products">
-
-            <#--            <label for="title">Title:</label>-->
-            <#--            <input type="text" id="title" name="title">-->
-            <#--            <br>-->
-            <#--            <label for="city">City:</label>-->
-            <#--            <input type="text" id="city" name="city">-->
-            <#--            <br>-->
-            <#--            <label for="category">Category:</label>-->
-            <#--            <select id="category" name="category">-->
-            <#--                <option value="">All</option>-->
-            <#--                <#list category as category>-->
-            <#--                    <option value="${category.id}">${category.name}</option>-->
-            <#--                </#list>-->
-            <#--            </select>-->
-            <#--            <br>-->
-
-
             <#list products as product>
                 <a href="/product/${product.id}">
                     <li>
@@ -246,7 +325,7 @@
                         </div>
                         <div class="description">
                             <span>${product.title}</span>
-                            <span>42</span>
+                            <span>${product.size}</span>
                             <span>White</span>
                         </div>
                         <div class="total">
@@ -279,7 +358,6 @@
         </div>
     </div>
 
-    </div>
     <#--        <div class="bottom-panel">-->
     <#--            <div id="price">The price of the whole basket: <span id="total"> ${.vars['totalPrice']} р.</span>-->
     <#--                <span class="divider"></span>-->
@@ -291,7 +369,15 @@
         <label class="button-1" for="checkbox">
             <div class="btn open"><img src="https://i.ibb.co/brq1tJj/shopping-cart.png" height="27px" alt=""/></div>
         </label></div>
+    <script>
+        $(".checkbox-dropdown").click(function () {
+            $(this).toggleClass("is-active");
+        });
 
+        $(".checkbox-dropdown ul").click(function (e) {
+            e.stopPropagation();
+        });
+    </script>
     <!-- MAIN -->
 </section>
 <!-- CONTENT -->
@@ -362,7 +448,7 @@
             document.body.classList.remove('dark');
         }
     })
-
 </script>
+
 </body>
 </html>

@@ -24,8 +24,8 @@
         <span class="text">BELLSELL</span>
     </a>
     <ul class="side-menu top">
-        <li class="active">
-            <a href="#">
+        <li>
+            <a href="/">
                 <i class='bx bxs-dashboard'></i>
                 <span class="text">Главная</span>
             </a>
@@ -37,7 +37,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/products">
                 <i class='bx bxs-doughnut-chart'></i>
                 <span class="text">Товары</span>
             </a>
@@ -144,8 +144,8 @@
                     </div>
                     <div class="col-6">
                         <div class="breadcrumb">
-                            <span><a href="/">Home</a></span>
-                            <span><a href="#">Product</a></span>
+                            <span><a href="/">Главная</a></span>
+                            <span><a href="/products">Товары</a></span>
                             <span class="active">${product.title}</span>
                         </div>
 
@@ -177,25 +177,15 @@
 
                             <div class="product-size">
                                 <h4>Size</h4>
-                                <#list .vars['product-size'] as size>
+                                <#list product.dimensions?keys as size>
                                     <div class="size-layout">
                                         <input type="radio" name="size" value="${size}" id="${size_index}"
                                                class="size-input">
                                         <label for="${size_index}" class="size">${size}</label>
-
-                                        <#--                                    <input type="radio" name="size" value="M" id="2" class="size-input">-->
-                                        <#--                                    <label for="2" class="size">M</label>-->
-
-                                        <#--                                    <input type="radio" name="size" value="L" id="3" class="size-input">-->
-                                        <#--                                    <label for="3" class="size">L</label>-->
-
-                                        <#--                                    <input type="radio" name="size" value="XL" id="4" class="size-input">-->
-                                        <#--                                    <label for="4" class="size">XL</label>-->
-
-                                        <#--                                    <input type="radio" name="size" value="XXL" id="5" class="size-input">-->
-                                        <#--                                    <label for="5" class="size">XXL</label>-->
                                     </div>
+
                                 </#list>
+
                             </div>
                             <div class="product-color">
                                 <h4>Color</h4>
@@ -215,11 +205,25 @@
                                 <div class="button buy-now"><i class='bx bxs-zap'></i> Купить сейчас</div>
                                 <form action="/cart/add/${product.id}" method="post" enctype="multipart/form-data">
                                     <button type="submit">
+                                        <input type="hidden" name="selectedSize" id="selectedSize" value="">
+                                        <!-- Скрытое поле для передачи значения выбранного размера -->
                                         <div class="button add-cart" type="submit"><i class='bx bxs-cart'>
                                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                                             </i> В корзину
                                         </div>
                                     </button>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            var sizeInputs = document.getElementsByName('size'); // Получаем все элементы input с именем 'size'
+                                            for (var i = 0; i < sizeInputs.length; i++) {
+                                                sizeInputs[i].addEventListener('change', function () { // Добавляем обработчик события change
+                                                    var selectedSize = this.value; // Получаем выбранный размер
+                                                    document.getElementById('selectedSize').value = selectedSize; // Устанавливаем значение в скрытое поле формы
+                                                });
+                                            }
+                                        });
+                                    </script>
+                                    </script>
                                 </form>
                                 <div class="button heart"><i class='bx bxs-heart'></i> Нравится</div>
                             </div>
@@ -254,6 +258,7 @@
                 sliderMainImage.src = sliderImageList[3].src;
                 console.log(sliderMainImage.src);
             };
+
         </script>
     </main>
     <!-- MAIN -->

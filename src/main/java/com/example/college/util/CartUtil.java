@@ -28,6 +28,7 @@ public class CartUtil {
     private static final String CART_COOKIE_NAME = "cart";
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private final ProductService productService;
+    Cart cartToProduct = new Cart();
 
     public List<Cart> getCart(HttpServletRequest request, HttpServletResponse response) {
         List<Cart> cart = getCartFromCookie(request);
@@ -35,14 +36,14 @@ public class CartUtil {
         return cart;
     }
 
-    public void addToCart(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+    public void addToCart(@PathVariable Long id,String size,HttpServletRequest request, HttpServletResponse response) {
         List<Cart> cart = getCartFromCookie(request);
         Product product = productService.getProductById(id);
-        Cart cartToProduct = new Cart();
         cartToProduct.setPreviewImage(product.getPreviewImageId());
         cartToProduct.setTitle(product.getTitle());
         cartToProduct.setDescription(product.getDescription());
         cartToProduct.setPrice(product.getPrice());
+        cartToProduct.setSize(size);
         cartToProduct.setPromotionalPrice(product.getPromotionalPrice());
         cart.add(cartToProduct);
         saveCartToCookie(response, cart);

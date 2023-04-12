@@ -22,7 +22,8 @@ public class CartController {
 
     @PostMapping("/add/{id}")
     public String addToCart(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response){
-        cartUtil.addToCart(id,request,response);
+        String selectedSize = request.getParameter("selectedSize"); // Чтение значения выбранного размера из параметра запроса
+        cartUtil.addToCart(id,selectedSize,request,response);
         return referer(request,response);
 
     }
@@ -32,6 +33,8 @@ public class CartController {
         cartUtil.removeFromCart(index,request,response);
         return referer(request,response);
     }
+
+
 
     public String referer(HttpServletRequest request,HttpServletResponse response){
         String referer = request.getHeader("Referer"); // Get the referer URL

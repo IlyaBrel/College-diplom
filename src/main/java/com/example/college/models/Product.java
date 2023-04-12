@@ -1,5 +1,8 @@
 package com.example.college.models;
 
+import com.example.college.models.ProductProperties.Brand;
+import com.example.college.models.ProductProperties.Color;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
@@ -51,16 +52,22 @@ public class Product {
     //Цены
     @Column(name = "popular")
     private boolean popular;
-    //Размеры
+
+
     @ElementCollection
-    private List<String> dimensions = new ArrayList<>();
-    @Column(name = "dimension")
-    private String dimension;
+    @CollectionTable(name="product_dimensions", joinColumns=@JoinColumn(name="product_id"))
+    @MapKeyColumn(name="dimension")
+    @Column(name="quantity")
+    private Map<String, Integer> dimensions = new HashMap<>();
 
-    public List<String> getDimensions() {
-        return dimensions = Arrays.asList(dimension.split(","));
-    }
 
+
+
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    private Brand brand;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    private Color color;
 
     @PrePersist
     private void init() {
@@ -72,6 +79,7 @@ public class Product {
         image.setProduct(this);
         images.add(image);
     }
+
 
 
     public boolean isPopular() {

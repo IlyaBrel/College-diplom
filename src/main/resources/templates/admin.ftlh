@@ -53,8 +53,21 @@
         Первая фотография: <input type="file" name="fileProduct1"/><br><br>
         Вторая фотография: <input type="file" name="fileProduct2"/><br><br>
         Третья фотография: <input type="file" name="fileProduct3"/><br><br>
-        Размеры через запятую<input type="text" name="dimensions"/><br><br>
+<#--        Размеры через запятую<input type="text" name="dimensions"/><br><br>-->
+
+        <div id="dimensions-container">
+            <div class="dimension-row">
+                <label for="dimension">Размер</label>
+                <input type="text" id="dimension" name="dimension">
+                <label for="quantity">Количество</label>
+                <input type="number" id="quantity" name="quantity">
+            </div>
+        </div>
+        <button type="button" onclick="addDimensionRow()">Добавить размер</button>
+
         <input type="hidden" name="_csrf" value="${_csrf.token}">
+
+
         <input type="submit" value="Добавить товар"/>
     </form>
 
@@ -65,5 +78,24 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="Добавить категорию"/>
 </form>
+<script>
+    function addDimensionRow() {
+        const container = document.getElementById('dimensions-container');
+        const newRow = document.createElement('div');
+        newRow.className = 'dimension-row';
+        newRow.innerHTML = `
+        <label for="dimension">Размер</label>
+        <input type="text" name="dimension">
+        <label for="quantity">Количество</label>
+        <input type="number" name="quantity">
+        <button type="button" onclick="removeDimensionRow(this)">Удалить размер</button>
+    `;
+        container.appendChild(newRow);
+    }
+
+    function removeDimensionRow(button) {
+        button.parentNode.remove();
+    }
+</script>
 </body>
 </html>

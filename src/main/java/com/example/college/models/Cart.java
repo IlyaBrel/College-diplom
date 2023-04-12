@@ -11,6 +11,7 @@ public class Cart {
     private Long previewImage;
     private String title;
     private String description;
+    private String size;
     private int price;
     private int promotionalPrice;
 }

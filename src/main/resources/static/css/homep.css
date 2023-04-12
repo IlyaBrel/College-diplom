@@ -1374,14 +1374,16 @@ body {
 }
 
 #content main form {
-    max-width: 1000px;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #content main form .form-input {
     display: flex;
     align-items: center;
     height: 50px;
+    width: 700px;
 }
 
 #content main form .form-input input {
@@ -1390,7 +1392,7 @@ body {
     height: 100%;
     border: none;
     background: var(--light);
-    border-radius: 10px 0 0 10px;
+    border-radius: 15px 0 0 15px;
     outline: none;
     width: 100%;
     color: var(--dark);
@@ -1407,9 +1409,10 @@ body {
     font-size: 18px;
     border: none;
     outline: none;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 20px 20px 0;
     cursor: pointer;
 }
+
 
 #content main .filters {
     display: flex;
@@ -1472,3 +1475,6 @@ body {
     grid-gap: 46px;
     font-family: 'Montserrat', sans-serif;
 }
+
+
+

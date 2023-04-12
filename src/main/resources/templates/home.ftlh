@@ -222,7 +222,7 @@
                         </div>
                         <div class="description">
                             <span>${product.title}</span>
-                            <span>42</span>
+                            <span>${product.size}</span>
                             <span>White</span>
                         </div>
                         <div class="total">

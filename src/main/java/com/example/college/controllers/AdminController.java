@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -61,9 +63,12 @@ public class AdminController {
     @PostMapping("/product/create")
     public String createProduct(@RequestParam("fileProduct1") MultipartFile fileProduct1, @RequestParam("fileProduct2") MultipartFile fileProduct2,
                                 @RequestParam("fileProduct3") MultipartFile fileProduct3, Product product, Principal principal,
-                                Model model, @RequestParam("dimensions") String dimensions) throws IOException {
-        product.setDimension(dimensions);
-        productService.saveProduct(principal, product, fileProduct1, fileProduct2, fileProduct3, dimensions);
+                                Model model, @RequestParam("dimension") List<String> dimensions,
+                                @RequestParam("quantity") List<Integer> quantities) throws IOException {
+            // Добавить размеры и их количество в Map dimensions
+
+
+        productService.saveProduct(principal, product, fileProduct1, fileProduct2, fileProduct3,dimensions,quantities);
         return "redirect:/products";
     }
 
