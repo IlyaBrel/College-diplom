@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../static/css/contact.css">
 
 
-    <title>Главная</title>
+    <title>Контакты</title>
 </head>
 <body>
 <#if user.activationCode??>
@@ -132,7 +132,7 @@
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
-        <a href="#" class="nav-link">Главная</a>
+        <a href="#" class="nav-link">Контакты</a>
         <form action="#">
             <div class="form-input">
                 <#--                <input type="search" placeholder="Search...">-->
@@ -163,7 +163,7 @@
 
                         <!-- topic - заголовок, text-one, text-two - текст -->
                         <div class="topic">Адрес</div>
-                        <div class="text-one">г. Гомель/div></div>
+                        <div class="text-one">г. Гомель</div>
                         <div class="text-two">Крестьянская 22</div>
                     </div>
                     <div class="phone details">
@@ -176,7 +176,7 @@
                         <i class="fas fa-envelope"></i>
                         <div class="topic">Email</div>
                         <div class="text-one">bellsellby@gmail.com</div>
-                        <div class="text-two">bellsellby@gmail.com<</div>
+                        <div class="text-two">bellsellby@gmail.com</div>
                     </div>
                 </div>
 

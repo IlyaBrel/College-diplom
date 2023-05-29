@@ -12,7 +12,7 @@
     <!-- My CSS -->
 
     <link rel="stylesheet" href="../static/css/faq.css">
-    <title>Главная</title>
+    <title>О нас</title>
 </head>
 <body>
 <#if user.activationCode??>
@@ -130,7 +130,7 @@
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
-        <a href="#" class="nav-link">Главная</a>
+        <a href="#" class="nav-link">О нас</a>
         <form action="#">
             <div class="form-input">
                 <#--                <input type="search" placeholder="Search...">-->
