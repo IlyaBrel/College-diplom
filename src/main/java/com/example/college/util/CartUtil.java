@@ -36,13 +36,29 @@ public class CartUtil {
         return cart;
     }
 
+    public List<Cart> removeAllCart(HttpServletRequest request, HttpServletResponse response) {
+        List<Cart> cart = new ArrayList<>(); // Create an empty cart list
+        saveCartToCookie(response, cart);
+        return cart;
+    }
+
+
     public void addToCart(@PathVariable Long id,String size,HttpServletRequest request, HttpServletResponse response) {
         List<Cart> cart = getCartFromCookie(request);
         Product product = productService.getProductById(id);
+        cartToProduct.setProductId(id);
         cartToProduct.setPreviewImage(product.getPreviewImageId());
         cartToProduct.setTitle(product.getTitle());
         cartToProduct.setDescription(product.getDescription());
-        cartToProduct.setPrice(product.getPrice());
+        if (product.getPromotionalPrice() >= 10){
+            cartToProduct.setPrice(product.getPromotionalPrice());
+        }
+        else {
+            cartToProduct.setPrice(product.getPrice());
+        }
+        Map<Long,String> map = new HashMap<>();
+        map.put(id,size);
+        cartToProduct.setIdAndSize(map);
         cartToProduct.setSize(size);
         cartToProduct.setPromotionalPrice(product.getPromotionalPrice());
         cart.add(cartToProduct);
@@ -54,6 +70,14 @@ public class CartUtil {
         cart.remove(index);
         saveCartToCookie(response, cart);
         return cart;
+    }
+    public int totalPrice(HttpServletRequest request){
+        List<Cart> cart = getCartFromCookie(request);
+        int totalPrice = 0;
+        for (Cart cartItem : cart) {
+            totalPrice += cartItem.getPrice();
+        }
+        return totalPrice;
     }
 
     private List<Cart> getCartFromCookie(HttpServletRequest request) {

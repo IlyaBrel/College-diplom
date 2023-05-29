@@ -1,7 +1,7 @@
 package com.example.college.models;
 
-import com.example.college.models.ProductProperties.Brand;
-import com.example.college.models.ProductProperties.Color;
+import com.example.college.models.productProperties.Brand;
+import com.example.college.models.productProperties.Color;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -53,17 +53,11 @@ public class Product {
     @Column(name = "popular")
     private boolean popular;
 
-
     @ElementCollection
     @CollectionTable(name="product_dimensions", joinColumns=@JoinColumn(name="product_id"))
     @MapKeyColumn(name="dimension")
     @Column(name="quantity")
     private Map<String, Integer> dimensions = new HashMap<>();
-
-
-
-
-
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Brand brand;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)

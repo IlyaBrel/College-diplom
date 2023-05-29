@@ -4,15 +4,14 @@ package com.example.college.services;
 import com.example.college.models.User;
 import com.example.college.models.enums.Role;
 import com.example.college.repositories.UserRepository;
+import com.example.college.util.JavaMailSenderUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,14 +21,26 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    private final JavaMailSenderUtil javaMailSenderUtil;
+
+    public User getById(Long id){
+        return userRepository.findById(id).orElse(null);
+    }
     public boolean createUser(User user) {
         String email = user.getEmail();
         if (userRepository.findByEmail(email) != null) return false;
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_ADMIN);
+        user.getRoles().add(Role.ROLE_USER);
+
+        user.setActivationCode(UUID.randomUUID().toString());
+
         log.info("Saving new User with email: {}", email);
         userRepository.save(user);
+
+        if (!StringUtils.isEmpty(user.getEmail())) {
+            javaMailSenderUtil.messageToEmailAccount(user.getEmail(), "Подтверждение аккаунта", user.getEmail(), user.getName(), user.getActivationCode());
+        }
         return true;
     }
 
@@ -62,5 +73,36 @@ public class UserService {
             }
         }
         userRepository.save(user);
+    }
+
+    public boolean activateUser(String code) {
+        User user = userRepository.findByActivationCode(code);
+        if (user == null) {
+            return false;
+        }
+        user.setActivationCode(null);
+        userRepository.save(user);
+        return true;
+    }
+
+    public boolean updatePassword(Long id, String oldPassword, String twoOldPassword, String newPassword) {
+        User user = userRepository.getById(id);
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            javaMailSenderUtil.messageToEmailPassword(user.getEmail(), "Обновление пароля", "ошибка при обновлении пароля", user.getName());
+            return false;
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+        javaMailSenderUtil.messageToEmailPassword(user.getEmail(), "Обновление пароля", "пароль успешно обновлён", user.getName());
+        return true;
+    }
+
+    public boolean activateUserMessage(Long id){
+        User user = userRepository.getById(id);
+        if (user.getActivationCode()!=null){
+            javaMailSenderUtil.messageToEmailAccount(user.getEmail(), "Подтверждение аккаунта", user.getEmail(), user.getName(), user.getActivationCode());
+            return true;
+        }
+        return false;
     }
 }

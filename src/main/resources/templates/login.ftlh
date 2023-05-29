@@ -28,6 +28,12 @@
         </form>
         <form action="/login" method="post" class="form">
             <h3 class="form__title">Вход</h3>
+            <#if errorMessageLogin??>
+                ${errorMessageLogin}
+            </#if>
+            <#if message1??>
+                ${message1}
+            </#if>
             <p>
                 <input type="email" name="username" class="form__input" placeholder="Логин">
             </p>
@@ -43,13 +49,6 @@
                 <a class="form__reg" href="/registration">Зарегистрироваться</a>
             </p>
         </form>
-
-        <#--        Эл. почта: <input type="email" name="username"><br><br>-->
-        <#--        Пароль: <input type="password" name="password"><br><br>-->
-        <#--        <input type="hidden" name="_csrf" value="${_csrf.token}">-->
-        <#--        <input type="submit" value="Вход"/>-->
-        <#--    </form>-->
-        <#--    <a href="/registration">Зарегистрироваться</a>-->
     </div>
 </article>
 

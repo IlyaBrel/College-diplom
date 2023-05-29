@@ -15,13 +15,13 @@
             <p>
             <h2 class="info_main">Shop</h2>
             </p>
-            <p>
-            <h3 class="info_premain">Shop - магазин какой-то хуйни, я хуй его знает, что ещё здесь написать, пока не
-                придумал</h3>
-            </p>
+            <h3 class="info_premain">Shop
+                </p>
 
-            <img src="../static/css/nikeImg.png" height="60px"/><br><br>
+                <img src="../static/css/nikeImg.png" height="60px"/><br><br>
         </form>
+        <p>
+                придумал</h3>
         <form action="/registration" method="post" class="form_reg">
             <h3 class="form__title">Регистрация</h3>
             <p>

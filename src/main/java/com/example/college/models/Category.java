@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,11 @@ public class Category {
     private String popular;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category")
     private List<Product> products = new ArrayList<>();
-
+    private LocalDateTime dateOfCreated;
+    @PrePersist
+    private void init() {
+        dateOfCreated = LocalDateTime.now();
+    }
 
     public void addImageToCategory(Image image) {
         image.setCategory(this);

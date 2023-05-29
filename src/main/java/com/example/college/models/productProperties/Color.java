@@ -1,7 +1,6 @@
-package com.example.college.models.ProductProperties;
+package com.example.college.models.productProperties;
 
 import com.example.college.models.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,18 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "brand")
+@Table(name = "color")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Brand {
+public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "brand")
+    @Column(name = "style")
+    private String style;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "color")
     private List<Product> products = new ArrayList<>();
 
 }

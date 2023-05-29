@@ -26,11 +26,9 @@ public class CategoryService {
     public Category findById(Long id) {
         return categoryRepository.findById(id).orElse(null);
     }
-
     public Page<Category> findFirst6Employees() {
         return categoryRepository.findAll(PageRequest.of(0, 6));
     }
-
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
@@ -43,11 +41,30 @@ public class CategoryService {
            image1.setPreviewImage(true);
             category.addImageToCategory(image1);
         }
-
 //        log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(), product.getUser().getEmail());
         Category categoryFromDb = categoryRepository.save(category);
         categoryFromDb.setPreviewImageId(categoryFromDb.getImageC().get(0).getId());
         categoryRepository.save(category);
+    }
+    public void update(Long id, MultipartFile file, Category categoryUpdate) throws IOException {
+        Category category = categoryRepository.getById(id);
+        category.setName(categoryUpdate.getName());
+        category.setPopular(categoryUpdate.getPopular());
+
+        Image image1;
+        if (file.getSize() != 0) {
+            image1 = toImageEntityC(file);
+            image1.setPreviewImage(true);
+            category.getImageC().get(0).setName(image1.getName());
+            category.getImageC().get(0).setOriginalFileName(image1.getOriginalFileName());
+            category.getImageC().get(0).setContentType(image1.getContentType());
+            category.getImageC().get(0).setSize(image1.getSize());
+            category.getImageC().get(0).setBytes(image1.getBytes());
+            log.info("Название" + image1.getOriginalFileName());
+        }
+//        log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(), product.getUser().getEmail());
+        categoryRepository.save(category);
+
     }
 
 
@@ -64,5 +81,6 @@ public class CategoryService {
         image1.setBytes(file.getBytes());
         return image1;
     }
+
 
 }
