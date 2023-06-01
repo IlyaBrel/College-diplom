@@ -217,75 +217,90 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div style="display:flex;">
-                                    <div class="row">
-                                        <div class="col2">
+                                <table>
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Новая Категория</th>
+                                        <th scope="col">Новая Категория</th>
+                                        <th scope="col">Новый цвет</th>
+                                        <th scope="col">Скидочная цена</th>
+                                        <th scope="col">Новые фото</th>
+                                        <th scope="col">Размеры</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td data-label="Новая Категория">
                                             <#list category as category>
-                                                <div>
-                                                    <a>${category.name}
+                                                <div style="display: flex">
+                                                    <a  style="display: flex">${category.name}
                                                         <input id="category" type="radio" name="category"
                                                                value="${category.id}"
-                                                               <#if product.category.id == category.id>checked</#if>></a>
-
+                                                               <#if product.category.id == category.id>checked</#if>>
+                                                    </a>
                                                 </div>
                                             </#list>
-                                        </div>
-                                        <div class="col2">
+                                        </td>
+                                        <td data-label="Новая Категория">
                                             <#list brands as brand>
-                                                <div>
-                                                    <a>${brand.name}<input id="brand" type="radio" name="brand"
-                                                                           value="${brand.id}"
-                                                                           <#if product.brand.id == brand.id>checked</#if>></a>
+                                                <div style="display: flex">
+                                                    <a  style="display: flex">${brand.name}<input id="brand" type="radio" name="brand"
+                                                                                                  value="${brand.id}"
+                                                                                                  <#if product.brand.id == brand.id>checked</#if>>
+                                                    </a>
                                                 </div>
                                             </#list>
-                                        </div>
-                                        <div class="col2">
+                                        </td>
+                                        <td data-label="Новый цвет">
                                             <#list colors as color>
-                                                <div>
-                                                    <a>${color.name}<input id="color" type="radio" name="color"
-                                                                           value="${color.id}"
-                                                                           <#if product.color.id == color.id>checked</#if>></a>
+                                                <div style="display: flex">
+                                                    <a  style="display: flex"> ${color.name}<input id="color" type="radio" name="color"
+                                                                                                   value="${color.id}"
+                                                                                                   <#if product.color.id == color.id>checked</#if>></a>
                                                 </div>
                                             </#list>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <input type="number" name="promotionalPrice" value="${product.promotionalPrice}"/>
-                                    <label for="name">Скидочная цена:</label>
-                                </div>
-                                <div class="row">
-                                    Первая фотография: <input type="file" name="fileProduct1"/><br><br>
-                                    Вторая фотография: <input type="file" name="fileProduct2"/><br><br>
-                                    Третья фотография: <input type="file" name="fileProduct3"/><br><br>
-                                </div>
-                                <#if product.dimensions?has_content>
-                                    <div class="row" style="display:flex;">
-                                        <div id="dimensions-container">
-                                            <#list product.dimensions  as sizes,quantity>
-                                                <div class="dimension-row">
-                                                    <label for="dimension">Размер</label>
-                                                    <input type="text" id="dimension" value="${sizes}" name="dimension">
-                                                    <label for="quantity">Количество</label>
-                                                    <input type="number" id="quantity" value="${quantity}" name="quantity">
+                                        </td>
+                                        <td data-label="Скидочная цена">
+                                            <input type="number" name="promotionalPrice" value="${product.promotionalPrice}"/>
+                                        </td>
+                                        <td data-label="Новые фото">
+                                            Первая фотография: <input type="file" name="fileProduct1"/><br><br>
+                                            Вторая фотография: <input type="file" name="fileProduct2"/><br><br>
+                                            Третья фотография: <input type="file" name="fileProduct3"/><br><br>
+                                        </td>
+                                        <td data-label="Размеры">
+                                            <#if product.dimensions?has_content>
+                                                <div class="row" style="display:flex;">
+                                                    <div id="dimensions-container">
+                                                        <#list product.dimensions  as sizes,quantity>
+                                                            <div class="dimension-row">
+                                                                <label for="dimension">Размер</label>
+                                                                <input type="text" id="dimension" value="${sizes}" name="dimension">
+                                                                <label for="quantity">Количество</label>
+                                                                <input type="number" id="quantity" value="${quantity}" name="quantity">
+                                                            </div>
+                                                        </#list>
+                                                    </div>
                                                 </div>
-                                            </#list>
-                                        </div>
-                                    </div>
-                                <#else>
-                                    <div class="row">
-                                        <div id="dimensions-container-pr">
-                                            <div class="dimension-row-pr">
-                                                <label for="dimension">Размер</label>
-                                                <input type="text" id="dimension" name="dimension">
-                                                <label for="quantity">Количество</label>
-                                                <input type="number" id="quantity" name="quantity">
-                                            </div>
-                                        </div>
-                                        <button type="button" onclick="addDimensionRowPr()">Добавить размер</button>
-                                    </div>
+                                            <#else>
+                                                <div class="row">
+                                                    <div id="dimensions-container-pr">
+                                                        <div class="dimension-row-pr">
+                                                            <label for="dimension">Размер</label>
+                                                            <input type="text" id="dimension" name="dimension">
+                                                            <label for="quantity">Количество</label>
+                                                            <input type="number" id="quantity" name="quantity">
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" onclick="addDimensionRowPr()">Добавить размер</button>
+                                                </div>
 
-                                </#if>
+                                            </#if>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </form>
                             <form style="display: flex;justify-content: center;"
                                   action="/admin/products/delete/${product.id}" method="post">

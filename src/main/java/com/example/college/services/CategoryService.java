@@ -68,8 +68,9 @@ public class CategoryService {
     }
 
 
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         categoryRepository.deleteById(id);
+        return true;
     }
 
     private Image toImageEntityC(MultipartFile file) throws IOException {

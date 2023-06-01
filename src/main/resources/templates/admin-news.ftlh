@@ -179,14 +179,7 @@
                                                                          value=" ${news.description}"></td>
                                         <td data-label="Новое изображение"><input type="file" name="file"></td>
                                         <td data-label="Товары">
-                                            <#list products as product>
-                                                <div>
-                                                    <label>
-                                                        ${product.title}
-                                                        <input type="checkbox" name="productsId" value="${product.id}">
-                                                    </label>
-                                                </div>
-                                            </#list></td>
+                                        </td>
                                         <td data-label="Обновить">
                                             <input type="hidden" name="_csrf"
                                                    value="${_csrf.token}">
@@ -195,6 +188,16 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div style="display:flex;">
+                                    <#list products as product>
+                                        <div style="display: flex; margin: 10px">
+                                            <label  style="display: flex;" >
+                                                ${product.title}
+                                                <input type="checkbox" name="productsId" value="${product.id}" <#if news.productsId?seq_contains(product.id)>checked</#if>>
+                                            </label>
+                                        </div>
+                                    </#list>
+                                </div>
                             </form>
                             <form style="display: flex;justify-content: center;"
                                   action="/admin/news/delete/${news.id}" method="post">

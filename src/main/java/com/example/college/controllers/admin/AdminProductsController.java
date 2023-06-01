@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,9 +48,12 @@ public class AdminProductsController {
         return referer(request, response);
     }
 
-    @PostMapping("/product/delete/{id}")
-    public String deleteProduct(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
-        productService.deleteProduct(id);
+    @PostMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes){
+        boolean deleteMessage = productService.deleteProduct(id);
+        if (deleteMessage) {
+            redirectAttributes.addFlashAttribute("successMessage", "Категория удалена!");
+        }
         return referer(request, response);
     }
 

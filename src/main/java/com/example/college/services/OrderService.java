@@ -1,9 +1,6 @@
 package com.example.college.services;
 
-import com.example.college.models.Cart;
-import com.example.college.models.Order;
-import com.example.college.models.PostalData;
-import com.example.college.models.User;
+import com.example.college.models.*;
 import com.example.college.models.enums.Status;
 import com.example.college.repositories.OrderRepository;
 import com.example.college.repositories.UserRepository;
@@ -21,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -36,6 +31,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final CartUtil cartUtil;
     private final JavaMailSenderUtil javaMailSenderUtil;
+
+    private final ProductService productService;
 
     private final UserRepository userRepository;
 
@@ -93,10 +90,38 @@ public class OrderService {
         order.setStatus(status.getAuthority());
         if (order.getStatus().equals("ДОСТАВЛЕН")){
             order.setDeliveryDate(LocalDateTime.now());
+            processOrder(order);
         }
         return orderRepository.save(order);
     }
 
+    public List<Map.Entry<Long, String>> processOrder(Order order) {
+        List<Map.Entry<Long, String>> result = new ArrayList<>();
+
+        if (!order.getStatus().equals(Status.В_ОБРАБОТКЕ.name()) &&
+                !order.getStatus().equals(Status.ОТМЕНЁН.name())) {
+            for (Map.Entry<Long, String> entry : order.getProductsIdAndSize().entrySet()) {
+                Long productId = entry.getKey();
+                String selectedSize = entry.getValue();
+
+                Product product = productService.getProductById(productId);
+                if (product != null) {
+                    Map<String, Integer> dimensions = product.getDimensions();
+                    if (dimensions.containsKey(selectedSize)) {
+                        int quantity = dimensions.get(selectedSize);
+                        if (quantity > 0) {
+                            dimensions.put(selectedSize, quantity - 1);
+
+                            Map.Entry<Long, String> productData = new HashMap.SimpleEntry<>(productId, selectedSize);
+                            result.add(productData);
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
 
 
 }

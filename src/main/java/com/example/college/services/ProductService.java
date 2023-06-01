@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -88,8 +89,9 @@ public class ProductService {
         return image;
     }
 
-    public void deleteProduct(Long id) {
+    public boolean deleteProduct(Long id) {
         productRepository.deleteById(id);
+        return true;
     }
 
     public Product getProductById(Long id) {
@@ -230,12 +232,10 @@ public class ProductService {
         for (Product product : productList) {
             Map<String, Integer> dimensions = product.getDimensions();
             Set<String> sizes = dimensions.keySet();
+            allSizes.addAll(sizes);
 
-            for (String size : sizes) {
-                allSizes.add(size);
-            }
         }
-        return allSizes;
+         return allSizes.stream().distinct().collect(Collectors.toList());
     }
 
 

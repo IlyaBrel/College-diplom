@@ -13,22 +13,22 @@
     <div class="block">
         <form class="form_info">
             <p>
-            <h2 class="info_main">Shop</h2>
+            <h2 class="info_main">BELLSELL</h2>
             </p>
-            <h3 class="info_premain">Shop
-                </p>
-
-                <img src="../static/css/nikeImg.png" height="60px"/><br><br>
+            Интернет магазина - брендовой одежды и обуви.
+            <p>
+            <h3 class="info_premain">
+                Лучший выбор.
+            </h3>
+            </p>
         </form>
-        <p>
-                придумал</h3>
         <form action="/registration" method="post" class="form_reg">
             <h3 class="form__title">Регистрация</h3>
             <p>
-                <input type="text" name="name" class="form__name">
+                <input type="text" name="name" class="form__name" placeholder="Имя пользователя">
             </p>
             <p>
-                <input type="email" name="email" class="form__input" placeholder="Логин">
+                <input type="email" name="email" class="form__input" placeholder="Почта">
             </p>
             <p>
                 <input type="text" name="phoneNumber" class="form__phoneNumber"

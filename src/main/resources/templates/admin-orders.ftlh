@@ -107,7 +107,7 @@
                                     </label>
                                 </div>
                                 <div class="col2">
-                                    <input class="inp"  type="text" value="${order.postalData.name}" name="name">
+                                    <input class="inp" type="text" value="${order.postalData.name}" name="name">
                                     <label for="name">Имя
                                     </label>
                                 </div>
@@ -119,20 +119,23 @@
                                     </label>
                                 </div>
                                 <div class="col2">
-                                    <input class="inp" type="text" value="${order.postalData.postalIndex}" name="postalIndex">
+                                    <input class="inp" type="text" value="${order.postalData.postalIndex}"
+                                           name="postalIndex">
                                     <label for="postalIndex">Почтовый индекс
                                     </label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col2">
-                                    <input class="inp" type="text" value="${order.postalData.phoneNumber}" name="phoneNumber"
+                                    <input class="inp" type="text" value="${order.postalData.phoneNumber}"
+                                           name="phoneNumber"
                                            id="phone">
                                     <label for="phone">Номер телефона
                                     </label>
                                 </div>
                                 <div class="col2">
-                                    <input class="inp"  type="text" value="${order.postalData.city}" name="city" id="city">
+                                    <input class="inp" type="text" value="${order.postalData.city}" name="city"
+                                           id="city">
                                     <label for="city">Город
                                     </label>
                                 </div>
@@ -140,12 +143,14 @@
                             </div>
                             <div class="row">
                                 <div class="col2">
-                                    <input class="inp" type="text" value="${order.postalData.street}" name="street" id="street">
+                                    <input class="inp" type="text" value="${order.postalData.street}" name="street"
+                                           id="street">
                                     <label for="street">Улица
                                     </label>
                                 </div>
                                 <div class="col2">
-                                    <input class="inp"  type="text" value="${order.postalData.houseNumber}" name="houseNumber"
+                                    <input class="inp" type="text" value="${order.postalData.houseNumber}"
+                                           name="houseNumber"
                                            id="houseNumber">
                                     <label for="houseNumber">Номер подъезда или дома
                                     </label>
@@ -182,16 +187,23 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <label><h3>Изменить статус</h3></label>
-                                        <form class="form-update-status" action="/admin/orders/update/${order.id}" method="post">
-                                            <#list status as status>
-                                                <div><input  id="category" type="radio" name="status"
-                                                            value="${status}">${status}</div>
-                                            </#list>
-                                            <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                            <input class="inp"  type="submit" value="Изменить">
-                                        </form>
+                                        <#if order.status != 'ДОСТАВЛЕН'>
+                                            <label><h3>Изменить статус</h3></label>
+
+                                            <form class="form-update-status" action="/admin/orders/update/${order.id}"
+                                                  method="post">
+                                                <#list status as status>
+                                                    <div><input id="category" type="radio" name="status"
+                                                                value="${status}"
+                                                                <#if order.status == status>checked</#if>>${status}
+                                                    </div>
+                                                </#list>
+                                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                <input class="inp" type="submit" value="Изменить">
+                                            </form>
+                                        </#if>
                                     </div>
+                            </div>
                         </dd>
                     <#else>
                         <h3>Заказов нет нет</h3>

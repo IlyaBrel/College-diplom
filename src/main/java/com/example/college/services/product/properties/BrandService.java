@@ -44,7 +44,8 @@ public class BrandService {
         brandRepository.save(newBrand);
     }
 
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         brandRepository.deleteById(id);
+        return true;
     }
 }

@@ -344,7 +344,25 @@
                     </dd>
                 </dl>
             </div>
-
+            <#if successMessage??>
+                <div class="popupr">
+                    <div class="headr">
+                        <div class="iconr">
+                            <div class="boxr">
+                                <i class='bx bx-x-circle bx-tada bx-rotate-270'></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bodyr">
+                        <div><h1>Готово!</h1></div>
+                        <div><p>${successMessage}</p></div>
+                        <div style="display: flex;justify-content: center;margin: -13px;">
+                            <a href="/admin/categorys">
+                                <div class="close-btnr">Вернуться</div>
+                            </a></div>
+                    </div>
+                </div>
+            </#if>
             <script>
                 (function () {
                     var d = document,

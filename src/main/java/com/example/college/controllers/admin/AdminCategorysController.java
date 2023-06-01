@@ -9,6 +9,7 @@ import com.example.college.services.product.properties.ColorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,8 +38,11 @@ public class AdminCategorysController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id") Long id,HttpServletRequest request, HttpServletResponse response){
-        categoryService.deleteById(id);
+    public String deleteCategory(@PathVariable("id") Long id,HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes){
+        boolean deleteMessage = categoryService.deleteById(id);
+        if (deleteMessage) {
+            redirectAttributes.addFlashAttribute("successMessage", "Категория удалена!");
+        }
         return referer(request,response);
     }
 
@@ -49,12 +53,15 @@ public class AdminCategorysController {
     }
     @PostMapping("/brand/update/{id}")
     public String updateBrand(@PathVariable("id")Long id, Brand brand,HttpServletRequest request, HttpServletResponse response) throws IOException {
-        brandService.update(id,brand);
+       brandService.update(id,brand);
         return referer(request,response);
     }
     @PostMapping("/brand/delete/{id}")
-    public String updateBrand(@PathVariable("id")Long id,HttpServletRequest request, HttpServletResponse response){
-        brandService.deleteById(id);
+    public String deleteBrand(@PathVariable("id")Long id, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes){
+        boolean deleteMessage = brandService.deleteById(id);
+        if (deleteMessage) {
+            redirectAttributes.addFlashAttribute("successMessage", "Категория удалена!");
+        }
         return referer(request,response);
     }
 
@@ -66,13 +73,16 @@ public class AdminCategorysController {
     }
 
     @PostMapping("/color/update/{id}")
-    public String updateColor(@PathVariable("id")Long id, Color color, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String updateColor(@PathVariable("id")Long id, Color color, HttpServletRequest request, HttpServletResponse response ) throws IOException {
         colorService.update(id,color);
         return referer(request,response);
     }
     @PostMapping("/color/delete/{id}")
-    public String updateColor(@PathVariable("id")Long id,HttpServletRequest request, HttpServletResponse response){
-        colorService.deleteById(id);
+    public String deleteColor(@PathVariable("id")Long id,HttpServletRequest request, HttpServletResponse response,  RedirectAttributes redirectAttributes){
+        boolean deleteMessage = colorService.deleteById(id);
+        if (deleteMessage) {
+            redirectAttributes.addFlashAttribute("successMessage", "Категория удалена!");
+        }
         return referer(request,response);
     }
 

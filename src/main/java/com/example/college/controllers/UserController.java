@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -29,13 +32,13 @@ public class UserController {
     private final ProductService productService;
 
     @GetMapping("/login")
-    public String login(User user, Model model,RedirectAttributes redirectAttributes) {
-        if (user.getEmail() == null || user.getPassword() == null) {
-            redirectAttributes.addFlashAttribute("errorMessageLogin", "Проверьте правильность написания логина или пароля");
-            return "login";
+    public String login(User user, Model model) {
+        if (user.getEmail() == null && user.getPassword()==null) {
+            model.addAttribute("errorMessageLogin", "Проверьте правильность написания логина или пароля");
         }
         return "login";
     }
+
 
     @GetMapping("/registration")
     public String registration() {
