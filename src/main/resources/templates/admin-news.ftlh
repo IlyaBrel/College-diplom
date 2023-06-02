@@ -119,14 +119,16 @@
                             </div>
                             <div class="row">
                                 <div class="col2">
-                                    <#list products as product>
-                                        <div>
-                                            <label>
-                                                ${product.title}
-                                                <input type="checkbox" name="productsId" value="${product.id}">
-                                            </label>
-                                        </div>
-                                    </#list>
+                                    <div style="display:flex;">
+                                        <#list products as product>
+                                            <div style="display: flex; margin: 10px">
+                                                <label  style="display: flex;" >
+                                                    ${product.title}
+                                                    <input type="checkbox" name="productsId" value="${product.id}">
+                                                </label>
+                                            </div>
+                                        </#list>
+                                    </div>
                                 </div>
 
                             </div>

@@ -112,27 +112,28 @@
                                     <label for="name">Описание объявления:</label>
                                 </div>
                             </div>
-                            <div class="row">
+
+                            <div class="row" style="display:flex;">
                                 <div class="col2">
                                     <#list category as category>
-                                        <div>
-                                            <a>${category.name}<input id="category" type="radio" name="category"
+                                        <div style="display:flex;">
+                                            <a style="display:flex;">${category.name}<input id="category" type="radio" name="category"
                                                                       value="${category.id}"></a>
                                         </div>
                                     </#list>
                                 </div>
                                 <div class="col2">
                                     <#list brands as brand>
-                                        <div>
-                                            <a>${brand.name}<input id="brand" type="radio" name="brand"
+                                        <div style="display:flex;">
+                                            <a style="display:flex;">${brand.name}<input id="brand" type="radio" name="brand"
                                                                    value="${brand.id}"></a>
                                         </div>
                                     </#list>
                                 </div>
                                 <div class="col2">
                                     <#list colors as color>
-                                        <div>
-                                            <a>${color.name}<input id="color" type="radio" name="color"
+                                        <div style="display:flex;">
+                                            <a style="display:flex;">${color.name}<input id="color" type="radio" name="color"
                                                                    value="${color.id}"></a>
                                         </div>
                                     </#list>
