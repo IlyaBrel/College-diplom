@@ -1,13 +1,13 @@
 package com.example.college.services;
 
 
-import com.example.college.services.product.properties.BrandService;
-import com.example.college.specifications.ProductSpecifications;
 import com.example.college.models.Image;
 import com.example.college.models.Product;
 import com.example.college.models.User;
 import com.example.college.repositories.ProductRepository;
 import com.example.college.repositories.UserRepository;
+import com.example.college.services.product.properties.BrandService;
+import com.example.college.specifications.ProductSpecifications;
 import com.example.college.util.FilterUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,7 @@ public class ProductService {
                             MultipartFile fileProduct1, MultipartFile fileProduct2, MultipartFile fileProduct3,
                             List<String> dimension, List<Integer> quantities) throws IOException {
         product.setUser(getUserByPrincipal(principal));
-
+        product.setPopular(true);
         Map<String, Integer> dimensions = new HashMap<>();
         for (int i = 0; i < dimension.size(); i++) {
             dimensions.put(dimension.get(i), quantities.get(i));
@@ -235,26 +236,25 @@ public class ProductService {
             allSizes.addAll(sizes);
 
         }
-         return allSizes.stream().distinct().collect(Collectors.toList());
+        return allSizes.stream().distinct().collect(Collectors.toList());
     }
-
-
-    public void updateProduct(Long id,Product productUpdate,
+    public void updateProduct(Long id, Product productUpdate,
                               MultipartFile fileProduct1, MultipartFile fileProduct2, MultipartFile fileProduct3,
                               List<String> dimension, List<Integer> quantities) throws IOException {
 
         Product product = getProductById(id);
-
         product.setTitle(productUpdate.getTitle());
         product.setDescription(productUpdate.getDescription());
         product.setPrice(productUpdate.getPrice());
-        if (productUpdate.getPromotionalPrice() != 0){
+        if (productUpdate.getPromotionalPrice() != 0) {
             product.setPromotionalPrice(productUpdate.getPromotionalPrice());
         }
         product.setCategory(productUpdate.getCategory());
         product.setColor(productUpdate.getColor());
         product.setBrand(productUpdate.getBrand());
+        product.setPopular(productUpdate.isPopular());
 
+        product.setLastUpdate(LocalDateTime.now());
 
         if (dimension.size() != 0) {
             product.getDimensions().clear();
@@ -301,5 +301,6 @@ public class ProductService {
 
         log.info("Saving new Product. Title: {}; imageid: {}; Author email: {}", product.getTitle(), product.getPreviewImageId(), product.getUser().getEmail());
         productRepository.save(product);
+
     }
 }

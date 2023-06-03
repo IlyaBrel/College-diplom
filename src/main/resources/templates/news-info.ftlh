@@ -15,18 +15,18 @@
 </head>
 <body>
 <#if user.activationCode??>
-    <div style="font-weight: 600;
+<div style="font-weight: 600;
     font-family: var(--lato);
     top: 40%;
     text-align: center;
     position: absolute;
     left: 30%;">
-        Подтвердите регистрацию аккаунта.<br>
-        Вам на почту которую вы указали при регистрации было выслано сообщение с подтверждением.
-        <form action="/email/message/${user.id}" method="post" style="margin: 10px;">
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <div style=" display: flex;justify-content: center;">
-                <button type="submit" style="
+    Подтвердите регистрацию аккаунта.<br>
+    Вам на почту которую вы указали при регистрации было выслано сообщение с подтверждением.
+    <form action="/email/message/${user.id}" method="post" style="margin: 10px;">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <div style=" display: flex;justify-content: center;">
+            <button type="submit" style="
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,15 +42,15 @@
     cursor: pointer;
     height: 50px;
 ">Выслать повторное подтверждение.
-                </button>
-            </div>
-            <div style="color:red; font-weight: 800; margin: 20px">
-                <#if messageMail??>
-                    ${messageMail}
-                </#if>
-            </div>
-        </form>
-    </div>
+            </button>
+        </div>
+        <div style="color:red; font-weight: 800; margin: 20px">
+            <#if messageMail??>
+                ${messageMail}
+            </#if>
+        </div>
+    </form>
+</div>
 <#else>
 <!-- SIDEBAR -->
 <section id="sidebar">
@@ -162,19 +162,20 @@
         </div>
         <ul class="box-popular-products">
             <#list news.productsId as product>
-                <a href="/product/${productService.getProductById(product).id}">
-                    <li>
-                        <#if productService.getProductById(product).promotionalPrice != 0 >
-                        <div class="badge">
-                            <#assign discountPercentage = (productService.getProductById(product).price-productService.getProductById(product).promotionalPrice)/productService.getProductById(product).price * 100>
-                            -${discountPercentage?int}%
-                        </div>
-                        <div class="p-c">
-                            </#if>
-                            <i> <img class="img-cat"
-                                     src="/images/${productService.getProductById(product).previewImageId}"
-                                     height="150px"/></i>
-                            <span class="text-pr">
+                <#if productService.getProductById(product).popular>
+            <a href="/product/${productService.getProductById(product).id}">
+                <li>
+                    <#if productService.getProductById(product).promotionalPrice != 0 >
+                    <div class="badge">
+                        <#assign discountPercentage = (productService.getProductById(product).price-productService.getProductById(product).promotionalPrice)/productService.getProductById(product).price * 100>
+                        -${discountPercentage?int}%
+                    </div>
+                    <div class="p-c">
+                        </#if>
+                        <i> <img class="img-cat"
+                                 src="/images/${productService.getProductById(product).previewImageId}"
+                                 height="150px"/></i>
+                        <span class="text-pr">
 						<h3>${productService.getProductById(product).title} </p></h3>
                         <p>${productService.getProductById(product).description}</p>
                             <div class="product-price">
@@ -185,29 +186,30 @@
                                 <span class="offer-price">${productService.getProductById(product).price} р.</span>
                             </#if>
                             </span>
-                        </div>
-                        </div>
+                    </div>
+                    </div>
 
-                        </h4>
-                        </span>
-                        </div>
-                    </li>
-                </a>
-                <style>
+                    </h4>
+                    </span>
+                    </div>
+                </li>
+            </a>
+            <style>
+                #content main .box-popular-products {
+                    margin: 0 200px 0 200px;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                    grid-gap: 24px;
+                    /* margin-top: 36px; */
+                }
+
+                @media screen and (max-width: 1400px) {
                     #content main .box-popular-products {
-                        margin: 0 200px 0 200px;
-                        display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                        grid-gap: 24px;
-                        /* margin-top: 36px; */
+                        margin: 0 0 0 0;
                     }
-
-                    @media screen and (max-width: 1400px) {
-                        #content main .box-popular-products {
-                            margin: 0 0 0 0;
-                        }
-                    }
-                </style>
+                }
+            </style>
+            </#if>
             </#list>
         </ul>
     </main>

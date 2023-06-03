@@ -41,9 +41,6 @@ public class User implements UserDetails {
     private List<Product> products = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Order> order = new ArrayList<>();
-
-
-
     private String activationCode;
 
     private LocalDateTime dateOfCreated;

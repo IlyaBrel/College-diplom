@@ -50,18 +50,21 @@ public class Product {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Category category;
     //Цены
-    @Column(name = "popular")
+    @Column(name = "active")
     private boolean popular;
 
     @ElementCollection
-    @CollectionTable(name="product_dimensions", joinColumns=@JoinColumn(name="product_id"))
-    @MapKeyColumn(name="dimension")
-    @Column(name="quantity")
+    @CollectionTable(name = "product_dimensions", joinColumns = @JoinColumn(name = "product_id"))
+    @MapKeyColumn(name = "dimension")
+    @Column(name = "quantity")
     private Map<String, Integer> dimensions = new HashMap<>();
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Brand brand;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Color color;
+
+    @JsonIgnore
+    private LocalDateTime lastUpdate;
 
     @PrePersist
     private void init() {
@@ -73,7 +76,6 @@ public class Product {
         image.setProduct(this);
         images.add(image);
     }
-
 
 
     public boolean isPopular() {

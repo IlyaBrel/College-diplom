@@ -3,6 +3,7 @@ package com.example.college.controllers.admin;
 import com.example.college.models.Product;
 import com.example.college.services.CategoryService;
 import com.example.college.services.ProductService;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,9 @@ public class AdminProductsController {
                                 @RequestParam("fileProduct2") MultipartFile fileProduct2,
                                 @RequestParam("fileProduct3") MultipartFile fileProduct3,
                                 @RequestParam("dimension") List<String> dimensions,
-                                @RequestParam("quantity") List<Integer> quantities,
+                                @RequestParam("quantity") List<Integer> quantities,@RequestParam(value = "isActive", required = false) boolean isActive,
                                 HttpServletRequest request, HttpServletResponse response) throws IOException {
+        product.setPopular(isActive);
         productService.updateProduct(id, product, fileProduct1, fileProduct2, fileProduct3, dimensions, quantities);
         return referer(request, response);
     }
@@ -56,6 +58,7 @@ public class AdminProductsController {
         }
         return referer(request, response);
     }
+
 
     public String referer(HttpServletRequest request, javax.servlet.http.HttpServletResponse response) {
         String referer = "/admin/products";// Get the referer URL

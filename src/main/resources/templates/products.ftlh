@@ -410,17 +410,19 @@
 
             <ul class="box-popular-products">
                 <#list products as product>
-                    <a href="/product/${product.id}">
-                        <li>
-                            <#if product.promotionalPrice != 0 >
-                            <div class="badge">
-                                <#assign discountPercentage = (product.price-product.promotionalPrice)/product.price * 100>
-                                -${discountPercentage?int}%
-                            </div>
-                            <div class="p-c">
-                                </#if>
-                                <i> <img class="img-cat" src="/images/${product.previewImageId}" height="150px"/></i>
-                                <span class="text-pr">
+                    <#if product.popular>
+                        <a href="/product/${product.id}">
+                            <li>
+                                <#if product.promotionalPrice != 0 >
+                                <div class="badge">
+                                    <#assign discountPercentage = (product.price-product.promotionalPrice)/product.price * 100>
+                                    -${discountPercentage?int}%
+                                </div>
+                                <div class="p-c">
+                                    </#if>
+                                    <i> <img class="img-cat" src="/images/${product.previewImageId}"
+                                             height="150px"/></i>
+                                    <span class="text-pr">
 						<h3>${product.title} </p></h3>
                         <p>${product.description}</p>
                             <div class="product-price">
@@ -431,29 +433,30 @@
                                 <span class="offer-price">${product.price} р.</span>
                             </#if>
                             </span>
-                            </div>
-                            </div>
+                                </div>
+                                </div>
 
-                            </h4>
-                            </span>
-                            </div>
-                        </li>
-                    </a>
-                    <style>
-                        #content main .box-popular-products {
-                            margin: 0 200px 0 200px;
-                            display: grid;
-                            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                            grid-gap: 24px;
-                            /* margin-top: 36px; */
-                        }
-
-                        @media screen and (max-width: 1400px) {
+                                </h4>
+                                </span>
+                                </div>
+                            </li>
+                        </a>
+                        <style>
                             #content main .box-popular-products {
-                                margin: 0 0 0 0;
+                                margin: 0 200px 0 200px;
+                                display: grid;
+                                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                                grid-gap: 24px;
+                                /* margin-top: 36px; */
                             }
-                        }
-                    </style>
+
+                            @media screen and (max-width: 1400px) {
+                                #content main .box-popular-products {
+                                    margin: 0 0 0 0;
+                                }
+                            }
+                        </style>
+                    </#if>
                 </#list>
             </ul>
         </main>
