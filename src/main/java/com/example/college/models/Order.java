@@ -47,6 +47,9 @@ public class Order {
     private LocalDateTime deliveryDate;
     private LocalDateTime orderDate;
 
+
+    private String uuid;
+
     @PrePersist
     private void init() {
         orderDate = LocalDateTime.now();

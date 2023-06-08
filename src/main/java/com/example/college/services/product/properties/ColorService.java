@@ -1,6 +1,6 @@
 package com.example.college.services.product.properties;
 
-import com.example.college.models.productProperties.Color;
+import com.example.college.models.product.properties.Color;
 import com.example.college.repositories.ColorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

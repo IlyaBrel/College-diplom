@@ -1,8 +1,9 @@
 package com.example.college.models;
 
-import com.example.college.models.productProperties.Brand;
-import com.example.college.models.productProperties.Color;
 
+
+import com.example.college.models.product.properties.Brand;
+import com.example.college.models.product.properties.Color;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;

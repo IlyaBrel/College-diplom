@@ -121,12 +121,14 @@
                                 <div class="col2">
                                     <div style="display:flex;">
                                         <#list products as product>
-                                            <div style="display: flex; margin: 10px">
-                                                <label style="display: flex;">
-                                                    ${product.title}
-                                                    <input type="checkbox" name="productsId" value="${product.id}">
-                                                </label>
-                                            </div>
+                                            <#if product.promotionalPrice !=0>
+                                                <div style="display: flex; margin: 10px">
+                                                    <label style="display: flex;">
+                                                        ${product.title}
+                                                        <input type="checkbox" name="productsId" value="${product.id}">
+                                                    </label>
+                                                </div>
+                                            </#if>
                                         </#list>
                                     </div>
                                 </div>
@@ -135,8 +137,14 @@
                             <div class="row">
                                 Фото: <input type="file" name="file"/><br><br>
                             </div>
+                            <div class="row">
+                                <input type="checkbox" id="sendingInfoToUsers"
+                                       name="sendingInfoToUsers">
+                                <label for="sendingInfoToUsers">Разослать пользователям?</label>
+                            </div>
                             <input type="hidden" name="_csrf" value="${_csrf.token}">
                             <input class="inp" type="submit" value="Добавить">
+
                         </form>
                     </dd>
                     <#list news as news>

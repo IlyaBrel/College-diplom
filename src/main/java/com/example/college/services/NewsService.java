@@ -4,7 +4,7 @@ import com.example.college.models.Category;
 import com.example.college.models.Image;
 import com.example.college.models.News;
 import com.example.college.models.Product;
-import com.example.college.models.productProperties.Brand;
+
 import com.example.college.repositories.ImageRepository;
 import com.example.college.repositories.NewsRepository;
 import lombok.RequiredArgsConstructor;

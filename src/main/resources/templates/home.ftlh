@@ -245,7 +245,7 @@
 
                     <ul class="box-popular-products">
                         <#list news.productsId as product>
-                            <#if productService.getProductById(product).popular>
+                                <#if productService.getProductById(product).popular>
                                     <a href="/product/${productService.getProductById(product).id}">
                                         <li>
                                             <#if productService.getProductById(product).promotionalPrice != 0 >
@@ -274,6 +274,7 @@
                                         </li>
                                     </a>
                                 </#if>
+
                         </#list>
                     </ul>
                 </#if>
@@ -294,7 +295,6 @@
                                     <form class="delete-btn" action="/cart/delete/${product_index}"
                                           method="post"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
                                         <button type="submit" class="button-delete-card">-</button>
                                     </form>
                                 </div>

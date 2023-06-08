@@ -49,6 +49,10 @@ public class User implements UserDetails {
         dateOfCreated = LocalDateTime.now();
     }
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "tg_user_id")
+    private TelegramUser telegramUser;
+
     // security
 
     public boolean isAdmin() {

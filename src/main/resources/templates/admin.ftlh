@@ -89,7 +89,33 @@
 
     <!-- MAIN -->
     <main>
-
+        <div style="
+        display: flex;
+        justify-content: center;
+        background: white;
+        text-align: center;">
+            <div><h3>Создать рассылку</h3>
+                <form action="/admin/tg/messages" method="post">
+                    <input class="inp" placeholder="Введите текс" name="messageText">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <button class="msgB" type="submit">Отправить</button>
+                </form>
+                <style>
+                    .msgB {
+                        font-family: 'Montserrat', sans-serif;
+                        border-radius: 10px;
+                        position: relative;
+                        padding: 10px;
+                        z-index: 9994;
+                        background: var(--blue);
+                        color: var(--dark);
+                        margin: 10px;
+                        user-select: none;
+                        cursor: pointer;
+                    }
+                </style>
+            </div>
+        </div>
         <table border="1">
             <tr>
                 <th>Email</th>

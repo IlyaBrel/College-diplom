@@ -188,19 +188,22 @@
                                     </div>
                                     <div>
                                         <#if order.status != 'ДОСТАВЛЕН'>
-                                            <label><h3>Изменить статус</h3></label>
+                                            <#if order.status != 'ОТМЕНЁН'>
+                                                <label><h3>Изменить статус</h3></label>
 
-                                            <form class="form-update-status" action="/admin/orders/update/${order.id}"
-                                                  method="post">
-                                                <#list status as status>
-                                                    <div><input id="category" type="radio" name="status"
-                                                                value="${status}"
-                                                                <#if order.status == status>checked</#if>>${status}
-                                                    </div>
-                                                </#list>
-                                                <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                                <input class="inp" type="submit" value="Изменить">
-                                            </form>
+                                                <form class="form-update-status"
+                                                      action="/admin/orders/update/${order.id}"
+                                                      method="post">
+                                                    <#list status as status>
+                                                        <div><input id="category" type="radio" name="status"
+                                                                    value="${status}"
+                                                                    <#if order.status == status>checked</#if>>${status}
+                                                        </div>
+                                                    </#list>
+                                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                    <input class="inp" type="submit" value="Изменить">
+                                                </form>
+                                            </#if>
                                         </#if>
                                     </div>
                             </div>

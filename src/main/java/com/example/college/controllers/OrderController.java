@@ -4,6 +4,7 @@ import com.example.college.models.Cart;
 import com.example.college.models.Order;
 import com.example.college.models.PostalData;
 import com.example.college.services.OrderService;
+import com.example.college.services.TelegramBotService;
 import com.example.college.services.UserService;
 import com.example.college.util.CartUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -32,6 +35,7 @@ public class OrderController {
     private final OrderService orderService;
     private final CartUtil cartUtil;
     private final UserService userService;
+    private final TelegramBotService telegramBotService;
 
     List<String> emptyFields = new ArrayList<String>();
     PostalData postalDataNotEmpty = new PostalData();
@@ -54,7 +58,7 @@ public class OrderController {
 
 
     @PostMapping("/order/new")
-    public String addToCart(Order order, Principal principal, HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes, @RequestParam(name = "lastName") String lastName,
+    public String addToCart(Order order, Principal principal, HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes, Update update, @RequestParam(name = "lastName") String lastName,
                             @RequestParam(name = "name", required = false) String name,
                             @RequestParam(name = "surname", required = false) String surname,
                             @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
@@ -148,7 +152,10 @@ public class OrderController {
             log.info("город" + city);
             log.info("улица" + street);
             log.info("номер дома" + houseNumber);
-            orderService.save(order, principal, request, response, postalData);
+            order.setUuid(String.valueOf(UUID.randomUUID()));
+            orderService.save(order, principal, request, response, postalData, update);
+            telegramBotService.createMessagesOrder(update, order.getUser().getTelegramUser().getChatId(), order);
+
             redirectAttributes.addFlashAttribute("message", "Заказ успешно сохранен");
         }
         return "redirect:/order";

@@ -1,8 +1,10 @@
 package com.example.college.services;
 
 
+import com.example.college.models.TelegramUser;
 import com.example.college.models.User;
 import com.example.college.models.enums.Role;
+import com.example.college.repositories.TelegramUserRepository;
 import com.example.college.repositories.UserRepository;
 import com.example.college.util.JavaMailSenderUtil;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +23,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    private final TelegramUserRepository telegramUserRepository;
+
     private final JavaMailSenderUtil javaMailSenderUtil;
 
-    public User getById(Long id){
+
+    public User getById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
+
     public boolean createUser(User user) {
         String email = user.getEmail();
         if (userRepository.findByEmail(email) != null) return false;
@@ -97,12 +103,37 @@ public class UserService {
         return true;
     }
 
-    public boolean activateUserMessage(Long id){
+    public boolean activateUserMessage(Long id) {
         User user = userRepository.getById(id);
-        if (user.getActivationCode()!=null){
+        if (user.getActivationCode() != null) {
             javaMailSenderUtil.messageToEmailAccount(user.getEmail(), "Подтверждение аккаунта", user.getEmail(), user.getName(), user.getActivationCode());
             return true;
         }
         return false;
     }
+
+    public boolean createTelegramUser(TelegramUser userTg) {
+        Long chatId = userTg.getChatId();
+        if (telegramUserRepository.getByChatId(chatId) != null) return false;
+        userTg.setCode(String.valueOf(UUID.randomUUID()));
+        telegramUserRepository.save(userTg);
+        return true;
+    }
+
+    public TelegramUser getByChatId(Long chatId) {
+        return telegramUserRepository.getByChatId(chatId);
+    }
+
+    public boolean setTelegramUserToUser(Long id, String code) {
+        TelegramUser telegramUser = telegramUserRepository.getTelegramUserByCode(code);
+        if (telegramUser == null) return false;
+        User user = getById(id);
+        user.setTelegramUser(telegramUser);
+        userRepository.save(user);
+        return true;
+    }
+
+
+
+
 }

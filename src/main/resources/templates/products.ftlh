@@ -423,41 +423,36 @@
                                     <i> <img class="img-cat" src="/images/${product.previewImageId}"
                                              height="150px"/></i>
                                     <span class="text-pr">
-						<h3>${product.title} </p></h3>
-                        <p>${product.description}</p>
-                            <div class="product-price">
-                            <#if product.promotionalPrice != 0 >
-                                <span class="offer-price">${product.promotionalPrice} р.</span>
-                                <span class="sale-price">${product.price} р.</span>
-                                <#else>
-                                <span class="offer-price">${product.price} р.</span>
-                            </#if>
-                            </span>
-                                </div>
-                                </div>
-
-                                </h4>
-                                </span>
+						                        <h3>${product.title} </p></h3>
+                                             <p>${product.description}</p>
+                                         <div class="product-price">
+                                             <#if product.promotionalPrice != 0 >
+                                                 <span class="offer-price">${product.promotionalPrice} р.</span>
+                                                 <span class="sale-price">${product.price} р.</span>
+                                             <#else>
+                                                 <span class="offer-price">${product.price} р.</span>
+                                             </#if>
+                                    </span>
                                 </div>
                             </li>
                         </a>
-                        <style>
-                            #content main .box-popular-products {
-                                margin: 0 200px 0 200px;
-                                display: grid;
-                                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                                grid-gap: 24px;
-                                /* margin-top: 36px; */
-                            }
-
-                            @media screen and (max-width: 1400px) {
-                                #content main .box-popular-products {
-                                    margin: 0 0 0 0;
-                                }
-                            }
-                        </style>
                     </#if>
                 </#list>
+                <style>
+                    #content main .box-popular-products {
+                        margin: 0 200px 0 200px;
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                        grid-gap: 24px;
+                        /* margin-top: 36px; */
+                    }
+
+                    @media screen and (max-width: 1400px) {
+                        #content main .box-popular-products {
+                            margin: 0 0 0 0;
+                        }
+                    }
+                </style>
             </ul>
         </main>
         <input type="checkbox" id="checkbox"/>

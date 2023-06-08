@@ -588,6 +588,7 @@ body {
 #content main .box-category li .img-cat {
     display: block;
     margin: 0 auto;
+    filter: drop-shadow(1px 1px 5px white);
 }
 
 #content main .box-category li .text h3 {

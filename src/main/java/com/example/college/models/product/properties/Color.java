@@ -1,4 +1,4 @@
-package com.example.college.models.productProperties;
+package com.example.college.models.product.properties;
 
 import com.example.college.models.Product;
 import lombok.AllArgsConstructor;

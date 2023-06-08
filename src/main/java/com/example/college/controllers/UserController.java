@@ -109,4 +109,19 @@ public class UserController {
         }
         return "redirect:/";
     }
+
+
+    @PostMapping("/telegram/user/{id}")
+    public String newTelegramUserConnect(@PathVariable("id") Long id,
+                                       RedirectAttributes redirectAttributes, String code){
+       boolean connectedUsers =  userService.setTelegramUserToUser(id,code);
+       if (connectedUsers){
+           redirectAttributes.addFlashAttribute("messageTg", "Вы успешно соединились с телеграмм профилем.");
+           log.info("даа");
+       } else {
+           redirectAttributes.addFlashAttribute("errorMessageTg", "Ошибка, возможно вы ошиблись при вводе кода");
+           log.info("нетт");
+       }
+        return "redirect:/user/" + id;
+    }
 }

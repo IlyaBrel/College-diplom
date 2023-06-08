@@ -2,8 +2,9 @@ package com.example.college.specifications;
 
 import com.example.college.models.Category;
 import com.example.college.models.Product;
-import com.example.college.models.productProperties.Brand;
-import com.example.college.models.productProperties.Color;
+
+import com.example.college.models.product.properties.Brand;
+import com.example.college.models.product.properties.Color;
 import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.*;
 

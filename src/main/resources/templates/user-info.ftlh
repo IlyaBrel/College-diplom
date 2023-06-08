@@ -185,6 +185,11 @@
                                         <i class="fa fa-user text-center mr-1"></i>
                                         Мои заказы
                                     </a>
+                                    <a class="nav-link" id="tgbot-tab" data-toggle="pill" href="#tgbot" role="tab"
+                                       aria-controls="tgbot" aria-selected="false">
+                                        <i class="fa fa-tgbot text-center mr-1"></i>
+                                        Телеграмм бот
+                                    </a>
                                 </div>
                             </div>
                             <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
@@ -209,6 +214,21 @@
                                                 <label>Email</label>
                                                 <input type="text" class="form-control" value="${user.email}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form id="myform" action="/telegram/user/${user.id}" method="post">
+                                                <h3 class="mb-4">Телеграмм бот</h3>
+                                                <div class="form-group">
+                                                    <label>Код</label>
+                                                    <input type="text" class="code" name="code">
+                                                    <div>
+                                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                        <button class="btn btn-primary" type="submit">Соеденить</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                     <div>
@@ -255,95 +275,94 @@
                                 </div>
                                 <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
                                     <h3 class="mb-4">Мои заказы</h3>
-                                        <div class="row">
-                                            <#list orders as order>
-                                            <h4>Заказ номер #${order_index+1}</h4>
-                                            <br>
-                                            <div class="col-md-6">
+                                    <div class="row">
+                                        <#list orders as order>
+                                        <h4>Заказ номер #${order_index+1}</h4>
+                                        <br>
+                                        <div class="col-md-6">
 
+                                        </div>
+                                        <div class="col-md-6">
+                                            Статус: <h3 style="color:#ff0000;">${order.status}</h3>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Имя</label>
+                                                <input type="text" class="form-control"
+                                                       value="${order.postalData.name}">
                                             </div>
-                                            <div class="col-md-6">
-                                                Статус: <h3 style="color:#ff0000;">${order.status}</h3>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Фамилия</label>
+                                                <input type="text" class="form-control"
+                                                       value="${order.postalData.lastName}">
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Имя</label>
-                                                    <input type="text" class="form-control"
-                                                           value="${order.postalData.name}">
-                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Отчество</label>
+                                                <input type="text" class="form-control"
+                                                       value="${order.postalData.surname}">
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Фамилия</label>
-                                                    <input type="text" class="form-control"
-                                                           value="${order.postalData.lastName}">
-                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Номер телефона</label>
+                                                <input type="text" class="form-control"
+                                                       value="${order.postalData.phoneNumber}">
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Отчество</label>
-                                                    <input type="text" class="form-control"
-                                                           value="${order.postalData.surname}">
-                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Индекс</label>
+                                                <input type="text" class="form-control"
+                                                       value="${order.postalData.postalIndex}">
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Номер телефона</label>
-                                                    <input type="text" class="form-control"
-                                                           value="${order.postalData.phoneNumber}">
-                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Адресс</label>
+                                                <input style="margin: 10px" type="text" class="form-control"
+                                                       value="Город: ${order.postalData.city}">
+                                                <input style="margin: 10px" type="text" class="form-control"
+                                                       value="Улица: ${order.postalData.street}">
+                                                <input style="margin: 10px" type="text" class="form-control"
+                                                       value="Номер дома: ${order.postalData.houseNumber}">
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Индекс</label>
-                                                    <input type="text" class="form-control"
-                                                           value="${order.postalData.postalIndex}">
-                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Итоговая цена в р.:</label>
+                                                <input type="text" class="form-control"
+                                                       value="${order.totalPrice} р.">
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Адресс</label>
-                                                    <input style="margin: 10px" type="text" class="form-control"
-                                                           value="Город: ${order.postalData.city}">
-                                                    <input style="margin: 10px" type="text" class="form-control"
-                                                           value="Улица: ${order.postalData.street}">
-                                                    <input style="margin: 10px" type="text" class="form-control"
-                                                           value="Номер дома: ${order.postalData.houseNumber}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Итоговая цена в р.:</label>
-                                                    <input type="text" class="form-control"
-                                                           value="${order.totalPrice} р.">
-                                                </div>
-                                            </div>
+                                        </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Товары:</label>
-                                                    <div class="panel">
-                                                        <div class="start">
-                                                            <div class="shopping-cart" bis_skin_checked="1">
-                                                                <#list order.productsIdAndSize as productId,size>
-                                                                    <div class="item">
-                                                                        <div class="image">
-                                                                            <img class="image-p"
-                                                                                 src="/images/${productService.getProductById(productId).previewImageId}"
-                                                                                 alt="">
-                                                                        </div>
-                                                                        <div class="description">
-                                                                            <span>${productService.getProductById(productId).category.name}</span>
-                                                                            <span>${productService.getProductById(productId).title}</span>
-                                                                            <span>Размер: ${size}</span>
-                                                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Товары:</label>
+                                                <div class="panel">
+                                                    <div class="start">
+                                                        <div class="shopping-cart" bis_skin_checked="1">
+                                                            <#list order.productsIdAndSize as productId,size>
+                                                                <div class="item">
+                                                                    <div class="image">
+                                                                        <img class="image-p"
+                                                                             src="/images/${productService.getProductById(productId).previewImageId}"
+                                                                             alt="">
                                                                     </div>
-                                                                </#list>
-                                                            </div>
+                                                                    <div class="description">
+                                                                        <span>${productService.getProductById(productId).category.name}</span>
+                                                                        <span>${productService.getProductById(productId).title}</span>
+                                                                        <span>Размер: ${size}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </#list>
                                                         </div>
                                                     </div>
-                                                    </#list>
                                                 </div>
+                                                </#list>
                                             </div>
                                         </div>
                                     </div>
@@ -382,6 +401,45 @@
                         <div class="bodyr">
                             <div><h1>Ошибка!</h1></div>
                             <div><p>${errorMessage}</p></div>
+                            <div style="display: flex;justify-content: center;margin: -13px;">
+                                <a href="/products">
+                                    <div class="close-btnrs" style="border-color: red"> Вернуться в магазин</div>
+                                </a></div>
+                        </div>
+                    </div>
+                </#if>
+
+                <#if messageTg??>
+                    <div class="popupr">
+                        <div class="headr">
+                            <div class="iconr">
+                                <div class="boxr">
+                                    <i class='bx bx-x-circle bx-tada bx-rotate-270'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bodyr">
+                            <div><h1>Готово!</h1></div>
+                            <div><p>${messageTg}</p></div>
+                            <div style="display: flex;justify-content: center;margin: -13px;">
+                                <a href="/products">
+                                    <div class="close-btnr"> Вернуться в магазин</div>
+                                </a></div>
+                        </div>
+                    </div>
+                </#if>
+                <#if errorMessageTg??>
+                    <div class="popupr">
+                        <div class="headr" style="background: red">
+                            <div class="iconr">
+                                <div class="boxr" style="color: red">
+                                    <i class='bx bx-x-circle bx-tada bx-rotate-270'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bodyr">
+                            <div><h1>Ошибка!</h1></div>
+                            <div><p>${errorMessageTg}</p></div>
                             <div style="display: flex;justify-content: center;margin: -13px;">
                                 <a href="/products">
                                     <div class="close-btnrs" style="border-color: red"> Вернуться в магазин</div>

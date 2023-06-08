@@ -8,19 +8,19 @@ import com.example.college.util.CartUtil;
 import com.example.college.util.JavaMailSenderUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-
 
 @Service
 @Slf4j
@@ -40,8 +40,15 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public Order findById(Long id){
+        return orderRepository.getById(id);
+    }
+    public Order findByUuid(String uuid){
+        return orderRepository.findOrderByUuid(uuid);
+    }
 
-    public boolean save(Order order, Principal principal, HttpServletRequest request, HttpServletResponse response, PostalData postalData) throws IOException {
+
+    public boolean save(Order order, Principal principal, HttpServletRequest request, HttpServletResponse response, PostalData postalData, Update update) throws IOException {
         if (postalData.getLastName().isEmpty()) return false;
         if (postalData.getName().isEmpty()) return false;
         if (postalData.getSurname().isEmpty()) return false;
@@ -85,10 +92,17 @@ public class OrderService {
     }
 
 
+    public Order updateByUuid(String uuid) {
+        Order order = orderRepository.findOrderByUuid(uuid);
+        order.setUuid(null);
+        order.setStatus(String.valueOf(Status.ОТМЕНЁН));
+        return orderRepository.save(order);
+    }
+
     public Order update(Long id, Status status) {
         Order order = orderRepository.getById(id);
         order.setStatus(status.getAuthority());
-        if (order.getStatus().equals("ДОСТАВЛЕН")){
+        if (order.getStatus().equals("ДОСТАВЛЕН")) {
             order.setDeliveryDate(LocalDateTime.now());
             processOrder(order);
         }
@@ -119,7 +133,6 @@ public class OrderService {
                 }
             }
         }
-
         return result;
     }
 

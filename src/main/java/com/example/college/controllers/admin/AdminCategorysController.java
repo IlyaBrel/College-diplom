@@ -1,8 +1,8 @@
 package com.example.college.controllers.admin;
 
 import com.example.college.models.Category;
-import com.example.college.models.productProperties.Brand;
-import com.example.college.models.productProperties.Color;
+import com.example.college.models.product.properties.Brand;
+import com.example.college.models.product.properties.Color;
 import com.example.college.services.CategoryService;
 import com.example.college.services.product.properties.BrandService;
 import com.example.college.services.product.properties.ColorService;
